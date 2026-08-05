@@ -32,9 +32,13 @@ import { fadeIn, fadeUp, slideX, waveScreen } from '@/lib/motion';
 import { REFLECTION_NOTIFICATION_ID } from '@/services/reflectionScheduler';
 import type { ReflectionOpenContext } from '@/types/reflection';
 
+import { useDesktopGuard } from '@/hooks/useDesktopGuard';
+import { DesktopGuardScreen } from '@/components/desktop/DesktopGuardScreen';
+
 type AppView = 'home' | 'dashboard';
 
 export default function App() {
+  const { isDesktop } = useDesktopGuard();
   const { user, loading, authGate } = useAuth();
   const mode = useWaveStore((s) => s.mode);
   const isLocked = useWaveStore((s) => s.isLocked);
@@ -194,6 +198,10 @@ export default function App() {
         </AppMain>
       </AppShell>
     );
+  }
+
+  if (isDesktop) {
+    return <DesktopGuardScreen />;
   }
 
   if (!user) {
