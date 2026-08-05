@@ -1,0 +1,1552 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QUM — Partnership Pitch · v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Brand palette — QUM tactical */
+    --bg:        #0E0D0A;
+    --bg-1:      #14120E;
+    --surface:   #161410;
+    --surface-2: #1C1A14;
+    --line-1:    rgba(232, 228, 219, 0.08);
+    --line-2:    rgba(232, 228, 219, 0.14);
+    --line-3:    rgba(232, 228, 219, 0.22);
+    --ink:       #E8E4DB;       /* cream paper */
+    --ink-dim:   #B6B0A2;
+    --ink-mute:  #857F72;
+    --ink-faint: #5B5648;
+    --accent:    #FF6B1A;
+    --accent-d:  #C8480B;
+    --green:     #B8D4B0;
+    --red:       #D4A8A0;
+
+    /* Type scale (1920×1080) */
+    --type-display:  140px;
+    --type-title:    64px;
+    --type-subtitle: 40px;
+    --type-lede:     32px;
+    --type-body:     26px;
+    --type-small:    24px;
+    --type-mono-l:   28px;
+    --type-mono:     24px;
+
+    /* Spacing */
+    --pad-top:    96px;
+    --pad-bottom: 80px;
+    --pad-x:      120px;
+    --gap-title:  44px;
+    --gap-item:   24px;
+
+    --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    --font-am:   'Noto Sans Ethiopic', 'IBM Plex Mono', sans-serif;
+  }
+
+  html, body { margin: 0; padding: 0; background: var(--bg); }
+  body {
+    font-family: var(--font-mono);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  deck-stage { background: var(--bg); }
+
+  /* ---------- Slide chrome ---------- */
+  section.slide {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    overflow: hidden;
+    position: relative;
+  }
+  .frame {
+    position: absolute;
+    inset: 40px 56px;
+    pointer-events: none;
+    border: 1px solid var(--line-1);
+  }
+  .frame::before, .frame::after,
+  .frame > span:nth-child(1), .frame > span:nth-child(2) {
+    content: '';
+    position: absolute;
+    width: 14px; height: 14px;
+    border: 1px solid var(--ink-faint);
+  }
+  .frame::before  { top: -1px;    left: -1px;    border-right: 0;  border-bottom: 0; }
+  .frame::after   { top: -1px;    right: -1px;   border-left: 0;   border-bottom: 0; }
+  .frame > span:nth-child(1) { bottom: -1px; left: -1px;  border-right: 0; border-top: 0; }
+  .frame > span:nth-child(2) { bottom: -1px; right: -1px; border-left: 0;  border-top: 0; }
+
+  .hud {
+    position: absolute;
+    left: var(--pad-x); right: var(--pad-x);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--ink-faint);
+    font-size: var(--type-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .hud.top    { top: 56px; }
+  .hud.bottom { bottom: 56px; }
+  .hud .dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    margin-right: 14px;
+    vertical-align: 1px;
+  }
+  .hud .live {
+    color: var(--accent);
+    letter-spacing: 0.22em;
+  }
+  .hud .sep { padding: 0 14px; color: var(--ink-faint); }
+
+  .body {
+    position: absolute;
+    inset: var(--pad-top) var(--pad-x) var(--pad-bottom);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .eyebrow {
+    font-size: var(--type-mono);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .eyebrow.dim { color: var(--ink-mute); }
+  .eyebrow .arr { color: var(--accent); margin-right: 14px; }
+
+  h1.title {
+    font-family: var(--font-mono);
+    font-size: var(--type-title);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+  }
+  h1.title em { font-style: normal; color: var(--accent); }
+
+  .lede {
+    font-size: var(--type-lede);
+    line-height: 1.32;
+    color: var(--ink-dim);
+    letter-spacing: -0.005em;
+    max-width: 1200px;
+  }
+
+  .body-txt {
+    font-size: var(--type-body);
+    line-height: 1.45;
+    color: var(--ink-dim);
+    letter-spacing: -0.003em;
+  }
+  .body-txt strong { color: var(--ink); font-weight: 500; }
+
+  .mono-s {
+    font-size: var(--type-small);
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .num-huge {
+    font-size: 220px;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+    color: var(--ink);
+    font-feature-settings: "tnum" 1;
+  }
+  .num-huge.accent { color: var(--accent); }
+
+  .rule {
+    height: 1px;
+    background: var(--line-2);
+    width: 100%;
+  }
+  .rule.accent { background: var(--accent); height: 2px; }
+
+  /* ---------- Reusable bits ---------- */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid var(--line-2);
+    font-size: var(--type-small);
+    color: var(--ink-dim);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .tag.accent { color: var(--accent); border-color: rgba(255,107,26,0.35); }
+  .tag .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+  .card {
+    border: 1px solid var(--line-2);
+    background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.003));
+    padding: 36px;
+  }
+  .card.accent { border-color: rgba(255,107,26,0.45); }
+  .card .card-no {
+    font-size: var(--type-mono);
+    color: var(--accent);
+    letter-spacing: 0.2em;
+  }
+  .card h3 {
+    margin: 18px 0 12px;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .card h3 .am {
+    font-family: var(--font-am);
+    color: var(--accent);
+    margin-left: 14px;
+    font-weight: 500;
+  }
+  .card p {
+    margin: 0;
+    font-size: var(--type-body);
+    line-height: 1.42;
+    color: var(--ink-dim);
+  }
+
+  /* ---------- Cover ---------- */
+  .cover {
+    background: var(--bg);
+    position: relative;
+  }
+  .cover .grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line-1) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-1) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: -1px -1px;
+    opacity: 0.6;
+  }
+  .cover .glow {
+    position: absolute;
+    left: 50%; top: 52%;
+    transform: translate(-50%, -50%);
+    width: 1100px; height: 1100px;
+    background: radial-gradient(circle at center, rgba(255,107,26,0.18), rgba(255,107,26,0) 60%);
+    filter: blur(20px);
+    pointer-events: none;
+  }
+  .cover .stamp-am {
+    font-family: var(--font-am);
+    font-size: 480px;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    font-weight: 600;
+    position: absolute;
+    left: 50%; top: 42%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0 0 80px rgba(255,107,26,0.18);
+  }
+  .cover .stamp-am::after {
+    content: '';
+    position: absolute;
+    right: -22px; top: 38%;
+    width: 18px; height: 18px;
+    background: var(--accent);
+  }
+  .cover .stamp-en {
+    position: absolute;
+    left: 50%; bottom: 180px;
+    transform: translateX(-50%);
+    font-size: 72px;
+    letter-spacing: 0.55em;
+    font-weight: 500;
+    color: var(--ink);
+    padding-left: 0.55em;
+    text-align: center;
+  }
+  .cover .stamp-en .sub {
+    display: block;
+    margin-top: 22px;
+    font-size: 22px;
+    letter-spacing: 0.32em;
+    color: var(--ink-mute);
+    text-align: center;
+    padding-left: 0;
+  }
+  .cover .meta-bl {
+    position: absolute; left: var(--pad-x); bottom: 120px;
+    color: var(--ink-mute); font-size: var(--type-small); letter-spacing: 0.16em;
+  }
+  .cover .meta-br {
+    position: absolute; right: var(--pad-x); bottom: 120px;
+    color: var(--ink-mute); font-size: var(--type-small); letter-spacing: 0.16em;
+    text-align: right;
+  }
+
+  /* ---------- Section / divider slides ---------- */
+  .section-divider .num-mark {
+    font-size: 280px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.04em;
+    font-weight: 500;
+    opacity: 0.18;
+    position: absolute;
+    left: var(--pad-x);
+    top: 280px;
+  }
+
+  /* ---------- Slide 2 — The Reflex ---------- */
+  .reflex-quote {
+    font-size: 92px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+    color: var(--ink);
+    max-width: 1500px;
+  }
+  .reflex-quote .strike {
+    text-decoration: line-through;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 4px;
+    color: var(--ink-mute);
+  }
+  .reflex-quote .accent { color: var(--accent); }
+
+  /* ---------- Stat table ---------- */
+  .stat-row {
+    display: grid;
+    grid-template-columns: 240px 1fr 320px;
+    align-items: baseline;
+    gap: 32px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line-2);
+  }
+  .stat-row:last-child { border-bottom: 1px solid var(--line-2); }
+  .stat-row .n {
+    font-size: 88px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    font-feature-settings: "tnum" 1;
+  }
+  .stat-row .n.accent { color: var(--accent); }
+  .stat-row .l {
+    font-size: var(--type-body);
+    line-height: 1.4;
+    color: var(--ink-dim);
+  }
+  .stat-row .l strong { color: var(--ink); font-weight: 500; }
+  .stat-row .src {
+    font-size: var(--type-small);
+    color: var(--ink-mute);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  /* ---------- Two-up & three-up ---------- */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+
+  /* ---------- State machine diagram ---------- */
+  .sm {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr 80px 1fr;
+    align-items: stretch;
+    margin-top: 12px;
+  }
+  .sm .node {
+    border: 1px solid var(--line-2);
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+  }
+  .sm .node .ph {
+    font-size: var(--type-mono);
+    color: var(--accent);
+    letter-spacing: 0.24em;
+  }
+  .sm .node h4 {
+    font-size: 30px;
+    margin: 12px 0 8px;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .sm .node p {
+    font-size: var(--type-small);
+    line-height: 1.4;
+    color: var(--ink-mute);
+    margin: 0;
+  }
+  .sm .node .dur {
+    margin-top: 18px;
+    font-size: var(--type-small);
+    color: var(--ink-faint);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .sm .arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 38px;
+    position: relative;
+  }
+  .sm .arrow::before {
+    content: '';
+    position: absolute;
+    left: 4px; right: 4px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+  .sm .arrow span {
+    position: relative;
+    background: var(--bg);
+    padding: 0 8px;
+    line-height: 1;
+  }
+
+  /* ---------- Heatmap ---------- */
+  .heatmap {
+    display: grid;
+    grid-template-columns: 80px repeat(24, 1fr);
+    gap: 2px;
+    font-size: 14px;
+  }
+  .heatmap .lbl {
+    color: var(--ink-faint);
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+  }
+  .heatmap .h {
+    height: 28px;
+    background: var(--surface);
+    border: 1px solid var(--line-1);
+  }
+  .heatmap .h[data-v="1"] { background: rgba(255,107,26,0.08); border-color: rgba(255,107,26,0.12); }
+  .heatmap .h[data-v="2"] { background: rgba(255,107,26,0.18); border-color: rgba(255,107,26,0.25); }
+  .heatmap .h[data-v="3"] { background: rgba(255,107,26,0.35); border-color: rgba(255,107,26,0.45); }
+  .heatmap .h[data-v="4"] { background: rgba(255,107,26,0.62); border-color: rgba(255,107,26,0.7); }
+  .heatmap .h[data-v="5"] { background: var(--accent); border-color: var(--accent); }
+  .heatmap .axis-lbl {
+    font-size: 16px;
+    color: var(--ink-faint);
+    letter-spacing: 0.14em;
+    text-align: center;
+    padding-top: 8px;
+  }
+
+  /* ---------- Bullets ---------- */
+  .lst {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .lst li {
+    font-size: var(--type-body);
+    line-height: 1.45;
+    color: var(--ink-dim);
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    align-items: baseline;
+  }
+  .lst li::before {
+    content: '';
+  }
+  .lst li .k {
+    color: var(--accent);
+    font-size: var(--type-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .lst li strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- Cooperative bullets ---------- */
+  .bullets {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .bullets li {
+    font-size: var(--type-body);
+    line-height: 1.45;
+    color: var(--ink-dim);
+    padding-left: 28px;
+    position: relative;
+  }
+  .bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.65em;
+    width: 14px; height: 1px;
+    background: var(--accent);
+  }
+  .bullets li strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- Crash report mock ---------- */
+  .cr-window {
+    border: 1px solid var(--line-2);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .cr-window .cr-head {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--line-2);
+    font-size: 18px;
+    color: var(--ink-mute);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .cr-window .cr-head .left { display: flex; align-items: center; gap: 14px; }
+  .cr-window .cr-head .dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
+  .cr-window .cr-body { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; gap: 22px; }
+  .cr-window .row { display: grid; grid-template-columns: 220px 1fr; gap: 24px; font-size: 22px; line-height: 1.4; }
+  .cr-window .row .k { color: var(--ink-faint); letter-spacing: 0.14em; text-transform: uppercase; font-size: 18px; padding-top: 4px; }
+  .cr-window .row .v { color: var(--ink-dim); }
+  .cr-window .row .v strong { color: var(--ink); font-weight: 500; }
+  .cr-window .row .v .accent { color: var(--accent); }
+
+  /* ---------- Partnership swap ---------- */
+  .swap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line-2);
+  }
+  .swap > div {
+    padding: 36px 40px;
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .swap > div + div { border-left: 1px solid var(--line-2); }
+  .swap h4 {
+    font-size: var(--type-mono);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: 500;
+  }
+  .swap .you h4 { color: var(--ink-mute); }
+  .swap .us h4  { color: var(--accent); }
+  .swap ul.bullets li { font-size: var(--type-body); }
+
+  /* ---------- Team grid ---------- */
+  .team {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  .team .person {
+    border: 1px solid var(--line-2);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.003));
+  }
+  .team .avatar {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--line-2);
+    background:
+      repeating-linear-gradient(45deg, var(--surface) 0 6px, var(--bg-1) 6px 12px);
+    position: relative;
+  }
+  .team .avatar::after {
+    content: attr(data-initials);
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .team .person h4 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .team .person .role {
+    font-size: var(--type-small);
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .team .person .placeholder {
+    font-size: 18px;
+    color: var(--ink-faint);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Closing CTA ---------- */
+  .cta-box {
+    border: 1px solid var(--line-3);
+    padding: 32px 44px;
+    background: linear-gradient(180deg, rgba(255,107,26,0.04), rgba(255,107,26,0.01));
+  }
+  .cta-box .cta-line {
+    font-size: 38px;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .cta-box .cta-line em { font-style: normal; color: var(--accent); }
+  .cta-box .cta-foot {
+    margin-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--type-small);
+    color: var(--ink-mute);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .cta-box .cta-foot .mail {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- Density toggle ---------- */
+  body[data-density="exec"] .detail { display: none !important; }
+
+  /* Print fallback (used by print HTML) */
+  @media print {
+    .hud, .frame { display: none; }
+  }
+</style>
+
+<script type="application/json" id="speaker-notes">
+["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+</script>
+</head>
+
+<body data-density="detail">
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============================================================ -->
+  <!-- 01 — Cover -->
+  <!-- ============================================================ -->
+  <section class="slide cover" data-label="01 Cover">
+    <div class="grid-bg"></div>
+    <div class="glow"></div>
+
+    <div class="frame"><span></span><span></span></div>
+
+    <div class="hud top">
+      <div><span class="dot"></span>QUM · CONFIDENTIAL · PARTNERSHIP BRIEF</div>
+      <div>DOC.QUM/26.05 &nbsp;·&nbsp; V 1.0</div>
+    </div>
+
+    <div class="stamp-am">ቁም</div>
+
+    <div class="stamp-en">QUM
+      <span class="sub">[ KUM ] — A M H A R I C &nbsp; FOR &nbsp; "STAND" / "STOP"</span>
+    </div>
+
+    <div class="meta-bl">
+      ADDIS ABABA · 2026<br/>
+      <span style="color:var(--ink-faint);">A TACTICAL ANTI&#8209;ADDICTION SYSTEM</span>
+    </div>
+    <div class="meta-br">
+      PREPARED FOR<br/>
+      <span style="color:var(--ink);">NGO · CLINICAL · INSTITUTIONAL PARTNERS</span>
+    </div>
+
+    <div class="hud bottom">
+      <div>10&nbsp;MIN BRIEF &nbsp;·&nbsp; 16 SECTIONS</div>
+      <div class="live"><span class="dot"></span>LIVE</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 02 — The reflex, not the failure -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="02 The reflex">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 01 / PROBLEM</div>
+      <div>02 / 16</div>
+    </div>
+
+    <div class="body" style="justify-content: center; gap: 56px;">
+      <div class="eyebrow"><span class="arr">→</span>REFRAME</div>
+
+      <div class="reflex-quote">
+        Behavioral addiction is not a&nbsp;<span class="strike">moral failure</span>.<br/>
+        It is a&nbsp;<span class="accent">mechanical reflex</span>&nbsp;running on hardware<br/>
+        the patient cannot consciously override.
+      </div>
+
+      <div style="display: flex; gap: 64px; margin-top: 24px;" class="detail">
+        <div style="flex: 1; max-width: 540px;">
+          <div class="eyebrow dim" style="margin-bottom: 14px;">CONVENTIONAL FRAME</div>
+          <div class="body-txt">
+            <strong>"Lack of willpower."</strong> Treatment is shame, abstinence pledges, and waiting for the next session.
+          </div>
+        </div>
+        <div style="flex: 1; max-width: 540px;">
+          <div class="eyebrow" style="margin-bottom: 14px;">SYSTEM FRAME</div>
+          <div class="body-txt">
+            <strong>A dopaminergic loop.</strong> Cue, craving, ritual, reward — repeating on a sub-second neural budget.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / PROBLEM&nbsp;·&nbsp;01</div>
+      <div>RE&#8209;FRAME&nbsp;THE&nbsp;DIAGNOSIS</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 03 — A neurological circuit -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="03 Neurological circuit">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 01 / PROBLEM</div>
+      <div>03 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 44px;">
+      <div class="eyebrow"><span class="arr">→</span>THE LOOP</div>
+      <h1 class="title">A four-stage circuit, not a&nbsp;<em>character flaw</em>.</h1>
+
+      <div class="lede" style="max-width: 1500px;">
+        Every relapse follows the same neural sequence. The window to intervene is the gap between <strong style="color:var(--ink)">craving</strong> and <strong style="color:var(--ink)">ritual</strong> — measured in seconds, not minutes.
+      </div>
+
+      <div class="sm" style="margin-top: 36px;">
+        <div class="node">
+          <div>
+            <div class="ph">STAGE 01</div>
+            <h4>Cue</h4>
+            <p>Notification. Boredom. A specific room. Wi-Fi reconnecting at 11&nbsp;PM.</p>
+          </div>
+          <div class="dur">EXTERNAL · &lt;1s</div>
+        </div>
+        <div class="arrow"><span>→</span></div>
+        <div class="node">
+          <div>
+            <div class="ph">STAGE 02</div>
+            <h4>Craving</h4>
+            <p>Dopamine anticipation spike. Subjective urge climbs toward peak.</p>
+          </div>
+          <div class="dur">PEAKS · ~90s</div>
+        </div>
+        <div class="arrow"><span>→</span></div>
+        <div class="node">
+          <div>
+            <div class="ph">STAGE 03 — 04</div>
+            <h4>Ritual &amp; reward</h4>
+            <p>Phone unlock, scroll, consume, numb. Loop closes. The pattern strengthens.</p>
+          </div>
+          <div class="dur">AUTOMATIC · UNCONSCIOUS</div>
+        </div>
+      </div>
+
+      <div class="body-txt detail" style="margin-top: 28px; max-width: 1500px;">
+        <strong style="color:var(--accent)">The intervention window is between Stage 02 and Stage 03.</strong> Most therapy operates after Stage 04 — interpreting damage, not interrupting it.
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / PROBLEM&nbsp;·&nbsp;02</div>
+      <div>CUE&nbsp;→&nbsp;CRAVING&nbsp;→&nbsp;RITUAL&nbsp;→&nbsp;REWARD</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 04 — The cost of the loop -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="04 The cost">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 01 / PROBLEM</div>
+      <div>04 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 36px;">
+      <div class="eyebrow"><span class="arr">→</span>THE STAKES</div>
+      <h1 class="title">The clinical load is real — and growing.</h1>
+
+      <div style="margin-top: 24px;">
+        <div class="stat-row">
+          <div class="n accent">~80%</div>
+          <div class="l">of people in low-income countries with a mental-health condition <strong>receive no treatment.</strong> Ethiopia sits near the bottom of treatment-coverage rankings globally.</div>
+          <div class="src">WHO MENTAL&nbsp;HEALTH ATLAS · DIRECTIONAL</div>
+        </div>
+        <div class="stat-row">
+          <div class="n">~0.1</div>
+          <div class="l"><strong>psychiatrists per 100,000 people</strong> in Ethiopia — versus 9.0 in high-income countries. Specialist care cannot scale to behavioural-addiction caseloads.</div>
+          <div class="src">WHO · GLOBAL HEALTH OBSERVATORY</div>
+        </div>
+        <div class="stat-row">
+          <div class="n">4–6h</div>
+          <div class="l"><strong>median daily screen time</strong> on personal devices across the 18–35 demographic. The exposure surface for compulsive use is now ambient.</div>
+          <div class="src">CROSS&#8209;STUDY MEDIAN · 2023&#8209;25</div>
+        </div>
+        <div class="stat-row">
+          <div class="n">40–60%</div>
+          <div class="l"><strong>relapse rate</strong> in behavioural and substance addictions within 12 months of treatment — comparable to chronic disease, not character flaw.</div>
+          <div class="src">NIDA · CHRONIC DISEASE MODEL</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / PROBLEM&nbsp;·&nbsp;03</div>
+      <div>FIGURES ARE DIRECTIONAL · CITED FOR NARRATIVE</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 05 — The clinical gap -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="05 The clinical gap">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 01 / PROBLEM</div>
+      <div>05 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 40px;">
+      <div class="eyebrow"><span class="arr">→</span>WHERE CARE STOPS</div>
+      <h1 class="title">Therapy ends at the door. The urge does&nbsp;not.</h1>
+
+      <div class="grid-2" style="margin-top: 32px; gap: 40px;">
+        <div class="card">
+          <div class="card-no">01 / IN-SESSION</div>
+          <h3>50 minutes a&nbsp;week</h3>
+          <p>Reflective. Retrospective. The patient narrates what already happened, from memory, in calm.</p>
+          <div class="rule" style="margin: 26px 0;"></div>
+          <div class="mono-s" style="color: var(--ink-mute);">≈ 0.5% of waking hours</div>
+        </div>
+        <div class="card accent">
+          <div class="card-no">02 / OUTPATIENT REALITY</div>
+          <h3>112 unsupervised hours</h3>
+          <p>Reactive. The craving fires at 11&nbsp;PM. The phone is in&nbsp;hand. There is no clinician in the room.</p>
+          <div class="rule accent" style="margin: 26px 0;"></div>
+          <div class="mono-s" style="color: var(--accent);">≈ 99.5% — where relapses actually happen</div>
+        </div>
+      </div>
+
+      <div class="body-txt detail" style="margin-top: 28px; max-width: 1500px;">
+        <strong>QUM is built for the 99.5%.</strong> Not a substitute for therapy — a tactical companion that operates between sessions and feeds data back into the&nbsp;next one.
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / PROBLEM&nbsp;·&nbsp;04</div>
+      <div>THE&nbsp;CARE&nbsp;GAP&nbsp;IS&nbsp;TEMPORAL,&nbsp;NOT&nbsp;CLINICAL</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 06 — QUM as outpatient companion -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="06 QUM overview">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 02 / SOLUTION</div>
+      <div>06 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 44px; justify-content: center;">
+      <div class="eyebrow"><span class="arr">→</span>WHAT QUM IS</div>
+
+      <div style="display: grid; grid-template-columns: 1fr 580px; gap: 80px; align-items: start;">
+        <div>
+          <h1 class="title" style="font-size: 80px; line-height: 1.02;">
+            A tactical, dopamine&#8209;circuit&#8209;breaking app —<br/>
+            <span style="color: var(--ink-mute);">deployed at the moment of</span>&nbsp;<em>peak craving</em>.
+          </h1>
+
+          <div class="lede" style="margin-top: 40px;">
+            QUM intercepts the urge with a locked <strong style="color:var(--ink)">10-minute Surf Session</strong>. The patient cannot scroll, swipe out, or rationalise their way back. They must survive the craving peak — and a stricter system surfaces the proof.
+          </div>
+        </div>
+
+        <div class="card" style="padding: 44px; align-self: stretch; display: flex; flex-direction: column; gap: 22px;">
+          <div class="card-no">DEFINITION</div>
+          <div style="font-family: var(--font-am); font-size: 132px; color: var(--accent); line-height: 0.95; font-weight: 500; letter-spacing: -0.03em;">ቁም</div>
+          <div style="font-size: 36px; color: var(--ink); letter-spacing: 0.18em; font-weight: 500;">QUM&nbsp;/&nbsp;kum&nbsp;/</div>
+          <div class="body-txt" style="font-size: 24px;">
+            <em style="color:var(--ink-mute);">v.</em> &nbsp;Amharic.<br/>
+            <strong>"Stand."&nbsp;"Stop."&nbsp;"Hold your ground."</strong>
+          </div>
+          <div class="rule"></div>
+          <div class="mono-s" style="color: var(--ink-mute);">An imperative, not a brand promise.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / SOLUTION&nbsp;·&nbsp;01</div>
+      <div>OUTPATIENT&nbsp;DIGITAL&nbsp;COMPANION</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 07 — The 10-minute wave (state machine overview) -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="07 The 10-minute wave">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 02 / SOLUTION · MECHANISM</div>
+      <div>07 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 36px;">
+      <div class="eyebrow"><span class="arr">→</span>THE STATE MACHINE</div>
+      <h1 class="title" style="text-wrap: balance;">A locked 10-minute wave. Three phases. <em>No&nbsp;skip.</em></h1>
+
+      <div class="lede" style="max-width: 1500px;">
+        Designed around the 90-second neurological half-life of an acute craving. The wave outlasts the spike.
+      </div>
+
+      <div class="sm" style="margin-top: 40px;">
+        <div class="node">
+          <div>
+            <div class="ph">PHASE 01</div>
+            <h4>Somatic interruption</h4>
+            <p>Body / cold / stillness. A physical task pulls the patient out of the trance loop.</p>
+          </div>
+          <div class="dur">0:00 — 3:00 &nbsp;·&nbsp; 180 sec</div>
+        </div>
+        <div class="arrow"><span>→</span></div>
+        <div class="node">
+          <div>
+            <div class="ph">PHASE 02</div>
+            <h4>Cognitive hijack</h4>
+            <p>AI-validated task or self-confrontation. The pre-frontal cortex is forced back online.</p>
+          </div>
+          <div class="dur">3:00 — 8:00 &nbsp;·&nbsp; 300 sec</div>
+        </div>
+        <div class="arrow"><span>→</span></div>
+        <div class="node">
+          <div>
+            <div class="ph">PHASE 03</div>
+            <h4>Cooldown</h4>
+            <p>Box breathing, four cycles. The autonomic system settles before the patient is released.</p>
+          </div>
+          <div class="dur">8:00 — 10:00 &nbsp;·&nbsp; ≥64 sec</div>
+        </div>
+      </div>
+
+      <div class="body-txt detail" style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+        <div><strong style="color:var(--accent)">No abandon button.</strong> Closing the app mid-wave logs a failure on resume.</div>
+        <div><strong style="color:var(--accent)">No fast-forward.</strong> Phases gate on real-time elapsed, not taps.</div>
+        <div><strong style="color:var(--accent)">No partial credit.</strong> Either the system clears the wave, or it doesn't.</div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / SOLUTION&nbsp;·&nbsp;02</div>
+      <div>WAVE&nbsp;DURATION&nbsp;600s&nbsp;·&nbsp;LOCK&nbsp;ENFORCED</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 08 — Phase 1 -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="08 Phase 1 Somatic">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 02 / SOLUTION · PHASE 01</div>
+      <div>08 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 36px;">
+      <div class="eyebrow"><span class="arr">→</span>PHASE 01 / 0:00 — 3:00</div>
+      <h1 class="title">Somatic interruption.</h1>
+      <div class="lede" style="max-width: 1500px;">
+        The reflex lives in the body. We pull it out of the screen and back into physical space — the patient chooses the modality, not the avoidance.
+      </div>
+
+      <div class="grid-3" style="margin-top: 36px;">
+        <div class="card">
+          <div class="card-no">01 / BODY</div>
+          <h3>Push-up set <span class="am">አካል</span></h3>
+          <p>Resilience-scaled, validated by tap-count. Re-routes blood, breath, and attention away from the dopamine pathway.</p>
+        </div>
+        <div class="card">
+          <div class="card-no">02 / COLD</div>
+          <h3>Cold water <span class="am">ቀዝቃዛ</span></h3>
+          <p>90-second face / neck / wrist contact. Vagal-tone shift drops sympathetic arousal within seconds.</p>
+        </div>
+        <div class="card">
+          <div class="card-no">03 / STILLNESS</div>
+          <h3>5-4-3-2-1 <span class="am">ጸጥታ</span></h3>
+          <p>Sensory grounding ladder. Forces conscious attention through five real-world inputs the screen cannot fake.</p>
+        </div>
+      </div>
+
+      <div class="body-txt detail" style="margin-top: 28px; max-width: 1500px;">
+        <strong>Why three options:</strong> a single forced modality is a tax patients learn to avoid. Choice within constraint preserves agency without offering an exit.
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / SOLUTION&nbsp;·&nbsp;03</div>
+      <div>BODY&nbsp;·&nbsp;COLD&nbsp;·&nbsp;STILLNESS</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 09 — Phase 2 -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="09 Phase 2 Cognitive">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 02 / SOLUTION · PHASE 02</div>
+      <div>09 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 36px;">
+      <div class="eyebrow"><span class="arr">→</span>PHASE 02 / 3:00 — 8:00</div>
+      <h1 class="title">Cognitive hijack.</h1>
+      <div class="lede" style="max-width: 1500px;">
+        The craving has been physically interrupted. Now the patient must <strong style="color:var(--ink)">re-engage the pre-frontal cortex</strong> — through self-confrontation or a&nbsp;validated focus task.
+      </div>
+
+      <div class="grid-3" style="margin-top: 36px;">
+        <div class="card">
+          <div class="card-no">A / LETTER</div>
+          <h3>Read what they wrote</h3>
+          <p>The patient&apos;s own onboarding letter to their future self. 8-second forced read gate. No skip.</p>
+        </div>
+        <div class="card">
+          <div class="card-no">B / VOICE</div>
+          <h3>Hear themselves</h3>
+          <p>A 30-second voice memo recorded in calm. Must play to completion. The clinician&apos;s patient, talking to the patient in&nbsp;crisis.</p>
+        </div>
+        <div class="card accent">
+          <div class="card-no">C / COGNITIVE</div>
+          <h3>Prove it</h3>
+          <p>A focus task validated by multimodal AI&nbsp;(Gemma). Camera or text proof-of-work. Re-tries on failure. No&nbsp;workaround.</p>
+        </div>
+      </div>
+
+      <div class="body-txt detail" style="margin-top: 24px; max-width: 1500px;">
+        <strong style="color:var(--accent)">After minute 4</strong>, an &quot;urge passed&quot; link appears — but the patient must rate the urge 0–10 and complete a guided breath before exit. Rating ≥4 returns them silently to the task.
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / SOLUTION&nbsp;·&nbsp;04</div>
+      <div>SELF&#8209;CONFRONTATION&nbsp;·&nbsp;AI&nbsp;PROOF&nbsp;OF&nbsp;WORK</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 10 — Phase 3 -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="10 Phase 3 Cooldown">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 02 / SOLUTION · PHASE 03</div>
+      <div>10 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 40px;">
+      <div class="eyebrow"><span class="arr">→</span>PHASE 03 / 8:00 — 10:00</div>
+
+      <div style="display: grid; grid-template-columns: 1fr 700px; gap: 80px; align-items: start;">
+        <div>
+          <h1 class="title">Cooldown.</h1>
+          <div class="lede" style="margin-top: 32px;">
+            Four cycles of <strong style="color:var(--ink)">box breathing</strong> — 4 in, 4 hold, 4 out, 4 hold. Unskippable. Tick-locked to real time.
+          </div>
+          <div class="body-txt" style="margin-top: 28px;">
+            The wave does not release a patient mid-spike. The autonomic system is allowed to settle <em style="color:var(--ink-mute)">before</em> they re-enter the&nbsp;environment that triggered the urge.
+          </div>
+
+          <ul class="bullets detail" style="margin-top: 28px;">
+            <li><strong>Result on completion:</strong> +50 XP, +5 resilience, wave logged.</li>
+            <li><strong>Result on rage-quit:</strong> wave logged as failed. Resilience held steady. No&nbsp;shame copy.</li>
+          </ul>
+        </div>
+
+        <!-- Breathing visualization -->
+        <div style="display: flex; flex-direction: column; gap: 24px; align-items: center; padding-top: 12px;">
+          <div style="width: 480px; height: 480px; border: 1.5px solid var(--accent); position: relative; display: flex; align-items: center; justify-content: center;">
+            <div style="position: absolute; inset: 60px; border: 1px dashed rgba(255,107,26,0.4);"></div>
+            <div style="position: absolute; inset: 140px; border: 1px solid rgba(255,107,26,0.3);"></div>
+            <div style="text-align: center;">
+              <div style="font-size: 96px; color: var(--accent); line-height: 1; font-weight: 500; letter-spacing: -0.02em;">4&middot;4&middot;4&middot;4</div>
+              <div style="margin-top: 18px; color: var(--ink-mute); font-size: 22px; letter-spacing: 0.22em;">× 4 CYCLES</div>
+            </div>
+            <div style="position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 14px; color: var(--ink); font-size: 20px; letter-spacing: 0.24em;">IN</div>
+            <div style="position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 14px; color: var(--ink); font-size: 20px; letter-spacing: 0.24em;">OUT</div>
+            <div style="position: absolute; left: -28px; top: 50%; transform: translateY(-50%) rotate(-90deg); background: var(--bg); padding: 0 14px; color: var(--ink); font-size: 20px; letter-spacing: 0.24em;">HOLD</div>
+            <div style="position: absolute; right: -42px; top: 50%; transform: translateY(-50%) rotate(90deg); background: var(--bg); padding: 0 14px; color: var(--ink); font-size: 20px; letter-spacing: 0.24em;">HOLD</div>
+          </div>
+          <div class="mono-s" style="color: var(--ink-faint); letter-spacing: 0.2em;">≥ 64s &middot; AUTONOMIC RE-REGULATION</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / SOLUTION&nbsp;·&nbsp;05</div>
+      <div>BOX&nbsp;BREATHING&nbsp;·&nbsp;UNSKIPPABLE</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 11 — Proof of work -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="11 Proof of work">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 02 / SOLUTION · RIGOR</div>
+      <div>11 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 36px;">
+      <div class="eyebrow"><span class="arr">→</span>WHAT MAKES IT CLINICAL</div>
+      <h1 class="title">Proof of work. <em>Not promises.</em></h1>
+      <div class="lede" style="max-width: 1500px;">
+        QUM is not a timer with affirmations. Every phase produces a&nbsp;cryptographic-or-multimodal artifact the system can verify.
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px;">
+        <div>
+          <div class="eyebrow dim" style="margin-bottom: 24px;">CONTROL SURFACE</div>
+          <ul class="lst">
+            <li><span class="k">L01</span><span><strong>Session lock</strong> — wave state persisted to native storage. Force-close mid-wave logs failure on resume.</span></li>
+            <li><span class="k">L02</span><span><strong>No abandon UI</strong> — phases gate on real elapsed time, not user input. The clock is the&nbsp;authority.</span></li>
+            <li><span class="k">L03</span><span><strong>Exit check</strong> — early release requires urge re-rating, breath, and a&nbsp;0–10 score. Rating ≥4 returns silently to task.</span></li>
+            <li><span class="k">L04</span><span><strong>Tap-count verifier</strong> — physical modalities count real device touches; difficulty scales with resilience score.</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="eyebrow" style="margin-bottom: 24px;">AI VALIDATION LAYER</div>
+          <ul class="lst">
+            <li><span class="k">V01</span><span><strong>Gemma multimodal</strong> validates cognitive proof-of-work — camera capture or text response against task prompt.</span></li>
+            <li><span class="k">V02</span><span><strong>Edge function arbiter</strong> — validation runs server-side via <code style="color:var(--ink)">validate&#8209;pow</code>; client cannot self-approve.</span></li>
+            <li><span class="k">V03</span><span><strong>Retry on failure</strong>, not skip. The patient cannot guess past the&nbsp;task.</span></li>
+            <li><span class="k">V04</span><span><strong>No biometric storage</strong>. Validation results are stored; capture artefacts are&nbsp;not.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / SOLUTION&nbsp;·&nbsp;06</div>
+      <div>UN&#8209;CHEATABLE&nbsp;BY&nbsp;DESIGN</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 12 — The Crash Report (section divider hero) -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="12 The Crash Report">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 03 / THE CLINICAL ASSET</div>
+      <div>12 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 40px; justify-content: center;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: center;">
+        <div>
+          <div class="eyebrow"><span class="arr">→</span>THE HOOK FOR INSTITUTIONS</div>
+          <h1 class="title" style="font-size: 88px; line-height: 1.02; margin-top: 36px;">
+            Relapse becomes&nbsp;<em>data</em>.
+          </h1>
+          <div class="lede" style="margin-top: 36px;">
+            Every failed wave, every honest reflection, every rage-quit produces a structured event. <strong style="color:var(--ink)">QUM converts the worst moment of a patient&apos;s week into the most useful one for their&nbsp;clinician.</strong>
+          </div>
+
+          <div class="body-txt detail" style="margin-top: 32px;">
+            The patient is never interrogated. Reflections are voluntary, voice-or-text, no auto-routing. What surfaces is what they chose to share — and that is the&nbsp;dataset.
+          </div>
+        </div>
+
+        <div style="position: relative; padding: 60px;">
+          <div style="font-size: 380px; line-height: 0.85; font-weight: 500; color: var(--accent); letter-spacing: -0.05em; text-align: center;">CR</div>
+          <div style="text-align: center; color: var(--ink); font-size: 32px; letter-spacing: 0.32em; margin-top: 12px;">CRASH&nbsp;·&nbsp;REPORT</div>
+          <div style="text-align: center; color: var(--ink-mute); font-size: 22px; letter-spacing: 0.22em; margin-top: 18px; text-transform: uppercase;">v 1.0 &nbsp;/&nbsp; PRIVATE BY DEFAULT</div>
+          <div style="position: absolute; top: 36px; left: 36px; right: 36px; bottom: 36px; border: 1px solid var(--line-2); pointer-events: none;"></div>
+          <div style="position: absolute; top: 24px; left: 24px; width: 18px; height: 18px; border: 1px solid var(--accent); border-right: 0; border-bottom: 0;"></div>
+          <div style="position: absolute; top: 24px; right: 24px; width: 18px; height: 18px; border: 1px solid var(--accent); border-left: 0; border-bottom: 0;"></div>
+          <div style="position: absolute; bottom: 24px; left: 24px; width: 18px; height: 18px; border: 1px solid var(--accent); border-right: 0; border-top: 0;"></div>
+          <div style="position: absolute; bottom: 24px; right: 24px; width: 18px; height: 18px; border: 1px solid var(--accent); border-left: 0; border-top: 0;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / CLINICAL&nbsp;ASSET&nbsp;·&nbsp;01</div>
+      <div>RELAPSE&nbsp;IS&nbsp;TELEMETRY</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 13 — What the therapist sees -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="13 What the therapist sees">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 03 / THE CLINICAL ASSET</div>
+      <div>13 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 28px;">
+      <div class="eyebrow"><span class="arr">→</span>THE THERAPIST DASHBOARD</div>
+      <h1 class="title">What the clinician sees on Monday morning.</h1>
+
+      <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; margin-top: 28px;">
+
+        <!-- Heatmap card -->
+        <div class="card" style="padding: 28px 32px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;">
+            <div class="card-no">01 / URGE&nbsp;HEATMAP&nbsp;·&nbsp;PATIENT&nbsp;#&nbsp;ETH&#8209;024</div>
+            <div class="mono-s" style="color: var(--ink-mute);">7&nbsp;DAY&nbsp;·&nbsp;24&nbsp;HOUR</div>
+          </div>
+
+          <div class="heatmap">
+            <div></div>
+            <div class="axis-lbl" style="grid-column: 2 / span 6;">MORNING</div>
+            <div class="axis-lbl" style="grid-column: 8 / span 6;">AFTERNOON</div>
+            <div class="axis-lbl" style="grid-column: 14 / span 6;">EVENING</div>
+            <div class="axis-lbl" style="grid-column: 20 / span 5;">NIGHT</div>
+
+            <div class="lbl">MON</div>
+            <div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="3"></div><div class="h" data-v="4"></div><div class="h" data-v="5"></div><div class="h" data-v="3"></div><div class="h" data-v="1"></div>
+
+            <div class="lbl">TUE</div>
+            <div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="3"></div><div class="h" data-v="4"></div><div class="h" data-v="5"></div><div class="h" data-v="5"></div><div class="h" data-v="3"></div><div class="h" data-v="1"></div>
+
+            <div class="lbl">WED</div>
+            <div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="2"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="3"></div><div class="h" data-v="4"></div><div class="h" data-v="5"></div><div class="h" data-v="4"></div><div class="h" data-v="2"></div><div class="h" data-v="1"></div>
+
+            <div class="lbl">THU</div>
+            <div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="2"></div><div class="h" data-v="3"></div><div class="h" data-v="3"></div><div class="h" data-v="4"></div><div class="h" data-v="5"></div><div class="h" data-v="2"></div><div class="h" data-v="0"></div>
+
+            <div class="lbl">FRI</div>
+            <div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="3"></div><div class="h" data-v="4"></div><div class="h" data-v="5"></div><div class="h" data-v="5"></div><div class="h" data-v="5"></div><div class="h" data-v="4"></div><div class="h" data-v="2"></div>
+
+            <div class="lbl">SAT</div>
+            <div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="2"></div><div class="h" data-v="1"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="3"></div><div class="h" data-v="4"></div><div class="h" data-v="4"></div><div class="h" data-v="3"></div><div class="h" data-v="3"></div><div class="h" data-v="2"></div><div class="h" data-v="1"></div>
+
+            <div class="lbl">SUN</div>
+            <div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="1"></div><div class="h" data-v="1"></div><div class="h" data-v="0"></div><div class="h" data-v="1"></div><div class="h" data-v="1"></div><div class="h" data-v="2"></div><div class="h" data-v="3"></div><div class="h" data-v="3"></div><div class="h" data-v="4"></div><div class="h" data-v="4"></div><div class="h" data-v="2"></div><div class="h" data-v="1"></div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 22px;">
+            <div class="mono-s" style="color: var(--accent); letter-spacing: 0.18em;">▴ PEAK&nbsp;CLUSTER · 22:00 — 00:00 · 6 / 7 DAYS</div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 16px; color: var(--ink-faint); letter-spacing: 0.16em;">
+              <span>LOW</span>
+              <div class="h" data-v="1" style="width: 16px; height: 14px;"></div>
+              <div class="h" data-v="2" style="width: 16px; height: 14px;"></div>
+              <div class="h" data-v="3" style="width: 16px; height: 14px;"></div>
+              <div class="h" data-v="4" style="width: 16px; height: 14px;"></div>
+              <div class="h" data-v="5" style="width: 16px; height: 14px;"></div>
+              <span>HIGH</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern card -->
+        <div class="card" style="padding: 28px 32px;">
+          <div class="card-no" style="margin-bottom: 22px;">02 / PATTERN BREAKDOWN · 30 DAYS</div>
+
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <div>
+              <div class="mono-s" style="color: var(--ink-faint); letter-spacing: 0.18em; margin-bottom: 8px;">TOP TRIGGER</div>
+              <div style="font-size: 32px; color: var(--ink); font-weight: 500;">Loneliness, late</div>
+            </div>
+            <div class="rule"></div>
+            <div>
+              <div class="mono-s" style="color: var(--ink-faint); letter-spacing: 0.18em; margin-bottom: 8px;">RISKIEST LOCATION</div>
+              <div style="font-size: 32px; color: var(--ink); font-weight: 500;">Bedroom · 68%</div>
+            </div>
+            <div class="rule"></div>
+            <div>
+              <div class="mono-s" style="color: var(--ink-faint); letter-spacing: 0.18em; margin-bottom: 8px;">STRONGEST LOOPHOLE</div>
+              <div style="font-size: 26px; color: var(--ink); font-weight: 400; line-height: 1.3;">"Just checking notifications before sleep."</div>
+            </div>
+            <div class="rule"></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <div class="mono-s" style="color: var(--ink-faint); letter-spacing: 0.18em; margin-bottom: 6px;">COMPLETED</div>
+                <div style="font-size: 44px; color: var(--accent); font-weight: 500;">17</div>
+              </div>
+              <div>
+                <div class="mono-s" style="color: var(--ink-faint); letter-spacing: 0.18em; margin-bottom: 6px;">FAILED</div>
+                <div style="font-size: 44px; color: var(--ink); font-weight: 500;">6</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="body-txt detail" style="margin-top: 20px; max-width: 1500px;">
+        <strong style="color:var(--accent)">Outcome for the clinician:</strong> a 30-second read at the start of session replaces 20 minutes of patient self-reconstruction. The therapy hour&nbsp;moves from <em>excavation</em>&nbsp;to <em>intervention</em>.
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / CLINICAL&nbsp;ASSET&nbsp;·&nbsp;02</div>
+      <div>ILLUSTRATIVE&nbsp;DATA&nbsp;·&nbsp;NOT&nbsp;REAL&nbsp;PATIENT</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 14 — Ethiopian infrastructure -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="14 Ethiopian infrastructure">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 04 / LOCAL VIABILITY</div>
+      <div>14 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 36px;">
+      <div class="eyebrow"><span class="arr">→</span>BUILT FOR THE NETWORK YOU ACTUALLY HAVE</div>
+      <h1 class="title">Engineered for Ethiopian conditions, not&nbsp;ported.</h1>
+      <div class="lede" style="max-width: 1500px;">
+        QUM degrades gracefully when the connection drops — which it&nbsp;will. The wave runs end-to-end without a server round-trip.
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 32px;">
+
+        <div>
+          <div class="eyebrow dim" style="margin-bottom: 24px;">OFFLINE-FIRST ARCHITECTURE</div>
+          <ul class="lst">
+            <li><span class="k">A1</span><span><strong>Local task cache.</strong> Physical, cognitive and mindful prompts ship with the app. No&nbsp;network needed to start a&nbsp;wave.</span></li>
+            <li><span class="k">A2</span><span><strong>Wave queue.</strong> Start, complete, fail events persist to native storage and flush when connectivity returns.</span></li>
+            <li><span class="k">A3</span><span><strong>Reflections outbox.</strong> Voice notes and text submissions queue locally; nothing is lost in a&nbsp;dropout.</span></li>
+            <li><span class="k">A4</span><span><strong>Session lock survives reboot.</strong> Force-close, kill, low-battery shutdown — the wave still resolves correctly on resume.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="eyebrow" style="margin-bottom: 24px;">CULTURAL &amp;&nbsp;LANGUAGE FIT</div>
+          <ul class="lst">
+            <li><span class="k">B1</span><span><strong>Amharic&#8209;native brand.</strong> <span style="font-family:var(--font-am); color: var(--ink);">ቁም</span> reads as imperative, not import. The product belongs to&nbsp;the&nbsp;language.</span></li>
+            <li><span class="k">B2</span><span><strong>Non-shaming clinical posture.</strong> No interrogation. No streaks lost. Aligns with relational recovery norms.</span></li>
+            <li><span class="k">B3</span><span><strong>Android-first.</strong> Capacitor build, tested on low-RAM devices. Camera, notifications, native&nbsp;storage.</span></li>
+            <li><span class="k">B4</span><span><strong>Data sovereignty.</strong> Reflections and voice memos stay in&nbsp;encrypted patient buckets. Never ad-monetised.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / VIABILITY&nbsp;·&nbsp;01</div>
+      <div>OFFLINE&nbsp;BY&nbsp;DEFAULT&nbsp;·&nbsp;SYNC&nbsp;ON&nbsp;RECONNECT</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 15 — The partnership -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="15 The partnership">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 05 / THE PARTNERSHIP</div>
+      <div>15 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 36px;">
+      <div class="eyebrow"><span class="arr">→</span>THE OFFER</div>
+      <h1 class="title">An outpatient digital companion, deployed alongside&nbsp;your&nbsp;care.</h1>
+      <div class="lede" style="max-width: 1500px;">
+        We are inviting a small group of NGOs, rehabilitation centres and mental-health institutions into a&nbsp;closed beta. <strong style="color:var(--ink)">QUM is positioned beside your clinicians, never above them.</strong>
+      </div>
+
+      <div class="swap" style="margin-top: 28px;">
+        <div class="us">
+          <h4>What QUM brings</h4>
+          <ul class="bullets">
+            <li><strong>Free deployment</strong> during beta for your outpatient cohort.</li>
+            <li><strong>Clinician dashboard</strong> — heatmaps, triggers, completion.</li>
+            <li><strong>Crash Report exports</strong> — printable summaries before each session.</li>
+            <li><strong>Direct engineering line</strong> for fixes and data questions.</li>
+          </ul>
+        </div>
+        <div class="you">
+          <h4>What we&apos;d explore together</h4>
+          <ul class="bullets">
+            <li>A <strong>cohort</strong> of outpatients to offer QUM as a between-session tool.</li>
+            <li><strong>Quarterly review</strong> — what helped, what failed, what to rebuild.</li>
+            <li><strong>Shared, anonymised insights</strong> on relapse patterns.</li>
+            <li>Clinical co-authorship on any outcome we publish together.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / PARTNERSHIP&nbsp;·&nbsp;01</div>
+      <div>EXPLORATORY&nbsp;BETA&nbsp;·&nbsp;NO&nbsp;COMMERCIAL&nbsp;TERMS</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <!-- 16 — Team & contact -->
+  <!-- ============================================================ -->
+  <section class="slide" data-label="16 Team and contact">
+    <div class="frame"><span></span><span></span></div>
+    <div class="hud top">
+      <div>SECTION 06 / TEAM &amp; NEXT STEP</div>
+      <div>16 / 16</div>
+    </div>
+
+    <div class="body" style="gap: 28px;">
+      <div class="eyebrow"><span class="arr">→</span>WHO IS BUILDING THIS</div>
+      <h1 class="title">The team.</h1>
+
+      <div class="team" style="margin-top: 20px;">
+        <div class="person">
+          <div class="avatar" data-initials="—"></div>
+          <div class="role">FOUNDER · PRODUCT</div>
+          <h4>[ Full name ]</h4>
+          <div class="placeholder">Background &middot;&nbsp;Role</div>
+        </div>
+        <div class="person">
+          <div class="avatar" data-initials="—"></div>
+          <div class="role">CLINICAL LEAD</div>
+          <h4>[ Full name ]</h4>
+          <div class="placeholder">Background &middot;&nbsp;Affiliation</div>
+        </div>
+        <div class="person">
+          <div class="avatar" data-initials="—"></div>
+          <div class="role">ENGINEERING</div>
+          <h4>[ Full name ]</h4>
+          <div class="placeholder">Background &middot;&nbsp;Stack</div>
+        </div>
+        <div class="person">
+          <div class="avatar" data-initials="—"></div>
+          <div class="role">CLINICAL ADVISOR</div>
+          <h4>[ Full name ]</h4>
+          <div class="placeholder">Background &middot;&nbsp;Institution</div>
+        </div>
+      </div>
+
+      <div class="cta-box" style="margin-top: 20px;">
+        <div class="cta-line">
+          Next step — a <em>30-minute working session</em> to scope a beta cohort in your institution.
+        </div>
+        <div class="cta-foot">
+          <div>QUM &middot; ADDIS ABABA &middot; 2026</div>
+          <div><span class="mail">partners@qum.app</span></div>
+          <div>BETA&nbsp;OPEN · Q3&nbsp;2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud bottom">
+      <div>QUM / NEXT&nbsp;STEP&nbsp;·&nbsp;01</div>
+      <div>ቁም &nbsp;·&nbsp; STAND&nbsp;WITH&nbsp;US</div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<!-- Tweaks panel -->
+<div id="tweaks-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="deck-stage.js"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<script type="text/babel">
+  const QUM_TWEAKS = /*EDITMODE-BEGIN*/{
+    "density": "detail"
+  }/*EDITMODE-END*/;
+
+  function QumTweaks() {
+    const [t, setTweak] = useTweaks(QUM_TWEAKS);
+
+    React.useEffect(() => {
+      document.body.setAttribute('data-density', t.density);
+    }, [t.density]);
+
+    return (
+      <TweaksPanel title="Tweaks">
+        <TweakSection title="Density">
+          <TweakRadio
+            label="Slide content"
+            value={t.density}
+            options={[
+              { label: 'Executive', value: 'exec' },
+              { label: 'Detailed', value: 'detail' }
+            ]}
+            onChange={(v) => setTweak('density', v)}
+          />
+          <div style={{ fontSize: 11, color: '#857F72', lineHeight: 1.4, marginTop: 4 }}>
+            Executive mode hides annotations and detail rows for boardroom-pace presentation.
+          </div>
+        </TweakSection>
+      </TweaksPanel>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<QumTweaks />);
+</script>
+
+</body>
+</html>

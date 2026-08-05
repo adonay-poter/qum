@@ -1,0 +1,80 @@
+{
+  "verifiedAt": "2026-05-19",
+  "entries": [
+    {
+      "id": "988",
+      "label": "988 Suicide & Crisis Lifeline",
+      "description": "24/7 support for suicidal crisis or emotional distress (US). Call or text 988.",
+      "phone": "988",
+      "url": "https://988lifeline.org",
+      "tags": ["crisis", "general", "suicide", "self_harm"],
+      "regions": ["US"]
+    },
+    {
+      "id": "samhsa",
+      "label": "SAMHSA National Helpline",
+      "description": "Free, confidential, 24/7 treatment referral and information for mental health and substance use (US).",
+      "phone": "1-800-662-4357",
+      "url": "https://www.samhsa.gov/find-help/helplines/national-helpline",
+      "tags": ["alcohol", "general", "substance"],
+      "regions": ["US"]
+    },
+    {
+      "id": "ncpg",
+      "label": "National Problem Gambling Helpline",
+      "description": "24/7 confidential support for problem gambling (US). Also reachable at 1-800-522-4700.",
+      "phone": "1-800-522-4700",
+      "url": "https://www.ncpgambling.org/help-treatment/help/",
+      "tags": ["gambling"],
+      "regions": ["US"]
+    },
+    {
+      "id": "quit_now",
+      "label": "1-800-QUIT-NOW",
+      "description": "Free coaching and resources to quit tobacco and nicotine (US).",
+      "phone": "1-800-784-8669",
+      "url": "https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/quitline/index.html",
+      "tags": ["nicotine"],
+      "regions": ["US"]
+    },
+    {
+      "id": "eating_alliance",
+      "label": "National Alliance for Eating Disorders",
+      "description": "Referrals and support Mon–Fri 9am–7pm ET (US). For immediate crisis, call or text 988.",
+      "phone": "1-866-662-1235",
+      "url": "https://www.allianceforeatingdisorders.com/get-help/",
+      "tags": ["food"],
+      "regions": ["US"]
+    },
+    {
+      "id": "samaritans_uk",
+      "label": "Samaritans (UK & ROI)",
+      "description": "24/7 emotional support. Not US-based — for callers outside the US.",
+      "phone": "116123",
+      "url": "https://www.samaritans.org",
+      "tags": ["crisis", "international"],
+      "regions": ["UK", "IE", "international"]
+    },
+    {
+      "id": "find_a_helpline",
+      "label": "Find A Helpline",
+      "description": "Search verified crisis lines worldwide by country and topic.",
+      "url": "https://findahelpline.com",
+      "tags": ["crisis", "international", "general"],
+      "regions": ["international"]
+    }
+  ],
+  "addictionTypes": {
+    "alcohol": ["samhsa", "988"],
+    "gambling": ["ncpg", "988"],
+    "nicotine": ["quit_now", "988"],
+    "food": ["eating_alliance", "988"],
+    "porn": ["988", "samhsa"],
+    "doomscroll": ["988", "samhsa"],
+    "cannabis": ["samhsa", "988"],
+    "gaming": ["988", "samhsa"],
+    "shopping": ["988", "samhsa"],
+    "other": ["988", "samhsa"],
+    "default": ["988", "samhsa", "find_a_helpline"]
+  }
+}

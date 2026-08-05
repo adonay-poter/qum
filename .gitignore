@@ -1,0 +1,6 @@
+node_modules
+dist
+# Keep android/ committed for Capacitor — do not ignore
+.env
+.env.local
+*.local

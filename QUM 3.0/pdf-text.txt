@@ -1,0 +1,525 @@
+Why Urges Pass
+The Science Behind the QUM Protocol — A Plain-English Guide
+This is a friendlier version of a scientific literature review on the QUM (Quick Urge
+Management) protocol — a three-step method for getting through cravings and behavioral
+urges. The original review is academic and dense. This version explains the same science with
+everyday examples, clear language, and all the original citations preserved so you can dig
+deeper if you want to. The science covered comes from five areas: how cravings actually work
+in the brain, why mental imagery feeds them, how social media exploits the same circuits, what
+breathing and exercise really do to your nervous system, and how repeated practice rewires the
+response over time.
+What's Inside
+The Big Picture — What QUM Is and Why It Might Work
+Wanting vs. Liking — Why Cravings Aren't Really About Pleasure
+Cravings Run on Mental Pictures (And You Can Crash Them)
+Why Endless Scrolling Hooks You — And How to Snap Out
+Breathing, Exercise, and Calming the Alarm System
+Practice Makes the Urge Smaller — How Your Brain Updates
+Putting It All Together
+What This Doesn't Prove (Honest Limitations)
+References
+1. The Big Picture — What QUM Is and Why It Might Work
+QUM stands for Quick Urge Management. It's a three-phase response you run when a craving or
+urge hits — whether that's the pull to scroll, smoke, drink, gamble, eat junk, or open the porn tab. The
+idea is that you don't have to defeat the urge with willpower. You just have to outlast it, intelligently,
+while it burns itself out.
+The three phases are:
+Phase 1 — Calm the body. A short burst of intense movement, then slow controlled
+breathing. This shifts your nervous system out of "panic" mode.
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+•
+
+-- 1 of 14 --
+
+Phase 2 — Hijack the mind. A demanding visual-spatial task (like sketching a weird
+shape, doing a puzzle, or playing Tetris). This steals the mental "screen space" your brain
+needs to keep the craving vivid.
+Phase 3 — Stay steady, build resilience. Keep breathing calmly while the wave passes.
+Each time you survive a wave without giving in, your brain quietly updates its expectations.
+🌊 Quick analogy: the wave
+A craving works like a wave. It rises, peaks, and falls — usually within 10–20 minutes if you
+don't feed it. Most people try to fight the wave (which is exhausting and often fails) or suppress
+it (which makes it bounce back harder). QUM is more like a surfboard — you ride it out while
+doing things that quietly shrink it.
+This guide walks through the science behind why each phase works. The research is real and
+published in peer-reviewed journals. Some of it is rock-solid; some is still being debated. We'll be
+honest about which is which.
+2. Wanting vs. Liking — Why Cravings Aren't Really About
+Pleasure
+The discovery that changed addiction science
+For decades, people assumed cravings were about chasing pleasure — you want the thing because the
+thing feels good. Then in the early 1990s, two neuroscientists named Kent Berridge and Terry
+Robinson made a discovery that quietly broke that assumption (Robinson & Berridge, 1993).
+They found that the brain has two separate systems for reward:
+"Wanting" — runs on dopamine, in deep parts of the brain. This is the pull, the urge, the
+need to get the thing.
+"Liking" — runs on different chemicals (mainly opioids), in tiny specific spots. This is the
+actual pleasure when you have the thing.
+Here's the wild part: these two systems can come apart. In addiction, the "wanting" system gets
+hypersensitive — louder and louder over years — while the "liking" system actually goes numb.
+People still crave intensely, but the thing they crave gives them less and less pleasure (Berridge &
+Robinson, 2016).
+🍔 The fast food example
+Think about the last time you ate junk food you didn't really enjoy. You may have wanted the
+chips badly, eaten them quickly, and then thought, "Wait — that wasn't even that good. Why did
+•
+•
+•
+•
+
+-- 2 of 14 --
+
+I want them so much?" That's the wanting-liking gap in action. Your dopamine system pushed
+you toward them; your pleasure system never delivered the payoff your urge promised.
+The proof: rats who wanted but couldn't enjoy
+In animal studies, Robinson and Berridge (1993) wiped out almost all dopamine in rats. The rats
+stopped going for rewards entirely — they wouldn't even feed themselves. But if you put sweet liquid
+directly in their mouths, they still showed normal "this tastes good" reactions. They lost the wanting
+but kept the liking.
+And the reverse happens in addiction. In a now-famous human study, Fischman and Foltin (1992)
+gave cocaine users tiny doses of cocaine that were too small to feel anything pleasurable. Users said
+neither button (cocaine vs. saline placebo) did anything for them — yet they kept pressing the cocaine
+button anyway. Wanting without liking. The pull was there even when the pleasure wasn't.
+A 10-year longitudinal study of people who developed alcohol use disorder found the same pattern:
+their wanting of alcohol steadily climbed over the decade, while their liking of it stayed roughly flat
+(Robinson & Berridge, 2024). The urge grew. The pleasure didn't.
+Why this matters for QUM
+💡 The key reframe
+A craving is not a signal that you would actually enjoy the thing. It's not a real "I want to be
+happy" message from your true self. It's a mechanical dopamine spike — a sensitized neural
+circuit firing because it learned to fire. Berridge and Robinson (2016) put it bluntly: the brain
+circuit for wanting is "dissociable from circuitry that mediates the degree to which it is 'liked'."
+This reframe matters because shame and self-blame are huge triggers for relapse. If you think the
+urge means "I'm broken" or "I really do want this thing," you have to fight not just the urge but also a
+story about yourself. If you understand the urge as a neural reflex — like a sneeze you didn't ask for
+— you can step back, watch it, and run your protocol without making it about your worth as a person.
+Recent extensions of this work show the same wanting-liking split in internet gaming disorder and
+tobacco use disorder (Ma et al., 2024), and in gambling and food addictions (Robinson, Fischer,
+Ahuja, Lesser, & Maniates, 2016). The pattern isn't just about drugs — it shows up wherever a
+behavior gets compulsively chased without much joy.
+
+-- 3 of 14 --
+
+3. Cravings Run on Mental Pictures (And You Can Crash Them)
+The theory: cravings need a mental "screen"
+In 2005, three psychologists — David Kavanagh, Jackie Andrade, and Jon May — proposed an idea
+called Elaborated Intrusion Theory (Kavanagh, Andrade, & May, 2005). It says cravings happen in
+two stages:
+Stage 1 — The intrusion. A thought pops in unbidden. "Cigarette." "Drink." "Phone." This
+part is fast and automatic.
+Stage 2 — The elaboration. Your mind runs with it. You picture the cigarette, you imagine
+the first sip, you can almost taste the food. This is where the craving gets its power.
+Here's the catch: that vivid imagery has to live somewhere. It lives in a part of working memory
+called the visuospatial sketchpad — basically, the "mental screen" you use to picture things. And
+that screen has limited space.
+📺 Mental RAM
+Think of your brain's imagery system like a computer's RAM. You can only run so many
+programs at once. If you try to picture a cigarette in vivid detail AND solve a Rubik's cube AND
+keep a map of your apartment in your head, something has to give. The mental "screen" can only
+display so much at a time.
+This leads to a testable prediction: if you give your brain a different visual-spatial task to chew on, the
+craving image should get fuzzier and weaker — because both can't have the screen at the same time.
+The evidence — and it's strong
+Researchers have run this experiment many times, with different tasks and different cravings:
+Eye movements, visual noise, and tapping patterns all reduced food cravings in dieters
+and non-dieters (Kemps, Tiggemann, Woods, & Soekov, 2004).
+Visual tasks worked; matched-difficulty auditory tasks didn't. Harvey, Kemps, and
+Tiggemann (2005) found this directly — the effect isn't just "distraction." It has to be visual-
+spatial distraction, because that's the specific resource cravings use.
+Clay modeling beat counting backwards for reducing cigarette cravings (May, Andrade,
+Panabokke, & Kavanagh, 2010). Shaping something with your hands hijacks the same
+visual-spatial system.
+Cravings selectively weaken visuospatial working memory, not other types of memory
+(Tiggemann, Kemps, & Parnell, 2010). When researchers gave people three different
+memory tests during cravings, only the visuospatial one suffered. This is the smoking gun
+— it shows cravings specifically tap that exact mental resource.
+1.
+2.
+•
+•
+•
+•
+
+-- 4 of 14 --
+
+The Tetris studies
+The most famous experiments here used the video game Tetris. In one lab study, just three minutes
+of Tetris significantly cut the strength, frequency, and vividness of naturally occurring cravings
+(Skorka-Brown, Andrade, & May, 2014).
+Then they took it out of the lab. Skorka-Brown, Andrade, Whalley, and May (2015) had 31 students
+carry iPods for a week. Seven times a day, the device asked them to rate any current cravings — for
+food, drugs, sex, exercise, anything. Some of the time, they then played 3 minutes of Tetris. The
+result: cravings dropped by about 14 percentage points on average, consistently, across the entire
+week, across every type of craving they tracked.
+💡 The takeaway for Phase 2 of QUM
+This is probably the strongest single piece of evidence supporting any phase of QUM. Cravings
+genuinely seem to need your mental "screen" to stay vivid. Force a demanding visual-spatial
+task onto that screen — sketching, puzzles, Tetris, even rearranging objects in your head — and
+the craving image starts losing resolution. May, Kavanagh, and Andrade (2015) reviewed a full
+decade of this research and confirmed the pattern holds up.
+Practical examples of Phase 2 tasks:
+Play Tetris or a similar shape-rotation game for 3–5 minutes
+Sketch an asymmetric geometric shape from imagination
+Mold something out of clay or putty
+Solve a sudoku, jigsaw, or spatial puzzle
+Mentally walk through your house and count the doors
+What won't work as well: listening to a podcast, talking to someone, or counting in your head. Those
+use different mental resources — they don't compete with the craving image.
+4. Why Endless Scrolling Hooks You — And How to Snap Out
+The slot machine in your pocket
+Behavioral addiction to digital feeds isn't just willpower failure. Researchers have shown that social
+media, video feeds, and porn sites use the same reward mechanics as slot machines. The technical
+term is a variable-ratio reinforcement schedule — rewards that show up unpredictably, after an
+unknown number of tries.
+🎰 The slot machine logic
+•
+•
+•
+•
+•
+
+-- 5 of 14 --
+
+A vending machine gives you a soda every time you put in money. Easy to stop using. A slot
+machine pays out unpredictably — sometimes the third pull, sometimes the fortieth. That
+unpredictability is what makes it impossibly compelling. Social media feeds work the same way.
+Most posts you scroll past are boring. But every once in a while — bam — a really good one.
+Your brain learns to keep pulling the lever (keep scrolling) because the next one might be the
+payoff.
+The science behind this is well documented. Andreassen, Pallesen, and Griffiths (2016) studied more
+than 23,000 people and built one of the standard scales for measuring social media addiction. They
+found addictive use was associated with lower self-esteem, narcissism, and several other vulnerability
+factors. The pattern looks similar to chemical addictions in many ways.
+Matthias Brand and colleagues developed a comprehensive framework called the I-PACE model
+(Interaction of Person-Affect-Cognition-Execution) that explains how internet-use disorders develop
+(Brand et al., 2019). The short version: vulnerabilities (genes, personality, mood issues) + reactive
+emotions and urges + weakened self-control = a habit that takes over. Over time, the behavior shifts
+from "I'm doing this because I want to" (goal-directed) to "I'm doing this automatically" (habit-
+based).
+Doom-scrolling is real, and brief exposure hurts
+Buchanan, Aknin, Lotun, and Sandstrom (2021) ran a clean little experiment. They had people scroll
+2–4 minutes of COVID-related news (the "doom" condition), or read about COVID-related acts of
+kindness, or get no news at all. Just 2–4 minutes of negative scrolling caused measurable drops in
+positive mood and optimism compared to no news. Kindness-scrolling didn't have that effect. The
+bad-news scrolling specifically did the damage.
+Brain changes — but read carefully
+A large study of more than 7,600 adolescents (ages 10–13) found that higher daily social media use
+was associated with lower cortical thickness across prefrontal, temporal, occipital, and parietal
+regions of the brain (Nagata et al., 2026). These are the same regions involved in executive control,
+attention, and visual processing.
+⚠️
+Honest caveat
+This is a correlation, not proof of cause. We don't know if heavy social media use thinned these
+brain regions, or if kids with thinner regions to start with were more drawn to social media.
+Cross-sectional studies can't answer the chicken-or-egg question. Most of the research on digital
+addictions has this limitation.
+
+-- 6 of 14 --
+
+The active-vs-passive distinction
+Here's an interesting finding. Zhai et al. (2025) used brain imaging to compare people who actively
+use short-video apps (making content, deliberately searching) versus those who passively scroll. The
+passive scrollers showed reduced "alerting" — basically, their attentional readiness was lower. The
+brain's default-mode network (the "mind-wandering" network) was tilted in a way that suggests a
+more zoned-out state.
+💡 Why this matters for breaking the loop
+Passive consumption hooks you into a kind of trance. Active generation — creating, sketching,
+writing, building, deliberately doing — pulls you back into a different mental mode (executive
+control). This is exactly why Phase 2 of QUM forces you to produce something rather than just
+distract yourself. You're not just changing the channel; you're switching modes from "passive
+receiver" back to "active agent."
+Treatment evidence
+A 2026 systematic review and meta-analysis of 125 studies looked at therapies for problematic digital
+technology use (Balhara et al., 2026). Structured psychological therapies and exercise-based
+programs both produced strong effects on smartphone addiction. That's relevant here: both active
+engagement approaches (the kind QUM uses) work better than just trying to passively will yourself to
+stop.
+5. Breathing, Exercise, and Calming the Alarm System
+What an urge feels like physically
+When a strong urge hits, your sympathetic nervous system fires up — heart rate climbs, breathing
+speeds up, stress hormones (cortisol, adrenaline) rise. Your body essentially treats the urge like a
+threat. And here's the cruel twist: when your body is in alarm mode, your prefrontal cortex — the
+rational, deciding part of your brain — gets harder to access. You become more impulsive precisely
+when you most need to think clearly.
+🚨 Trying to read a book during a fire alarm
+You wouldn't try to study for an exam while a fire alarm is blaring. Your brain literally can't
+focus. An intense urge is your body's version of that alarm. Until the alarm quiets down, no
+amount of "just think about your goals" will help. You have to physically calm the system first.
+
+-- 7 of 14 --
+
+The Polyvagal Theory question (an honest detour)
+You may have heard of "Polyvagal Theory," developed by Stephen Porges. It's a popular framework
+that explains breathing and calming techniques in terms of activating a specific vagus nerve pathway
+(Porges, 2007). The theory has had huge clinical impact.
+⚠️
+A scientific controversy worth knowing about
+In 2023, the journal Biological Psychology published critiques that cut deep. Grossman (2023)
+wrote that "there is broad consensus among experts that each basic physiological assumption of
+the polyvagal theory is untenable." Neuhuber and Berthoud (2022) found the theory's anatomy
+doesn't match what we know about the vagus nerve. Doody, Burghardt, and Dinets (2023)
+showed the theory's evolutionary claims (reptiles vs. mammals) don't hold up either.
+This does not mean breathing exercises don't work. They clearly do — the evidence is strong.
+It just means we may be working through different mechanisms than the popular story says.
+Always a good idea to know when a popular framework is contested.
+What we actually know works
+Slow breathing has well-documented effects. A systematic review by Zaccaro et al. (2018) found
+consistent results: breathing at slow rates (fewer than 10 breaths per minute) increases heart rate
+variability, raises certain calming brainwave patterns, lowers anxiety, and improves emotional
+comfort.
+Heart rate variability biofeedback works for cravings. The strongest evidence comes from Eddie,
+Nguyen, Zeng, Mei, and Emery (2025), who ran a high-quality clinical trial (120 adults with
+substance use disorder). Eight weeks of wearable HRV biofeedback significantly reduced negative
+emotions, cravings, and substance use days. Most strikingly, it broke the link between feeling a
+craving and then using — people felt cravings but didn't act on them as often.
+Exercise reduces cravings — but not for the reason most people think. De Jesus and Prapavessis
+(2018) studied 110 smokers doing 10 minutes of moderate exercise. Cravings dropped significantly.
+But when they checked: it wasn't the cortisol reduction doing the work (that effect wasn't statistically
+significant). It was the change in mood — both positive and negative affect — that mediated the
+benefit. Exercise makes you feel different, and that shift carries the craving down.
+Scerbo, Faulkner, Taylor, and Thomas (2010) compared passive sitting, moderate walking, and
+vigorous running. Both walking and running reduced cravings, with no big difference between
+intensities. So you don't need to sprint — a brisk walk works.
+The brain–heart connection
+One reason this matters: heart rate variability (basically, how flexibly your heart rate changes beat to
+beat) is closely linked to how well your prefrontal cortex can do its job. Thayer, Hansen, Saus-Rose,
+
+-- 8 of 14 --
+
+and Johnsen (2009) found that people with higher resting HRV perform better on executive function
+tasks. A recent causal experiment by Lee et al. (2025) showed that increases in cardiac vagal activity
+were directly linked to improved performance on a cognitive control task — and to increased
+activation in the prefrontal cortex.
+💡 Why Phase 1 of QUM is built this way
+A short burst of movement (anything that gets your heart rate up briefly) followed by slow
+controlled breathing is doing two things at once:
+The movement metabolizes the adrenaline spike and shifts your mood (the actual
+mechanism behind exercise's effect on cravings).
+The slow breathing activates parasympathetic pathways that improve heart rate
+variability and restore prefrontal access.
+The net effect: by the time you start Phase 2, your rational brain is back online. You can actually
+do the visual-spatial task. Without Phase 1, you'd be trying to solve a puzzle while a fire alarm is
+going off.
+6. Practice Makes the Urge Smaller — How Your Brain Updates
+What "extinction learning" actually is
+This is the long game. Every time you experience a trigger and don't get the reward (didn't smoke
+after seeing the lighter, didn't scroll after the boredom hit), your brain quietly takes a note. Over many
+trials, the trigger stops automatically triggering the urge. This is called extinction learning.
+🔔 Pavlov in reverse
+You know Pavlov's dogs — bell rings, food comes, dogs eventually drool just at the bell. But
+here's the part most people don't know: if you keep ringing the bell without food, the dogs
+eventually stop drooling. That's extinction. Your craving triggers are like that bell. If you keep
+encountering them without giving in, the brain slowly stops reacting.
+The honest complication
+Bouton's classic research showed that extinction doesn't erase the original learning — it adds a new
+learning on top (Bouton, 2004; Bouton, Maren, & McNally, 2020). The original "trigger means
+reward" memory is still in there, just suppressed. This is why:
+Time gaps can cause "spontaneous recovery." Take a long break and the old response can
+pop back.
+1.
+2.
+•
+
+-- 9 of 14 --
+
+New environments cause "renewal." If you got clean in rehab, the old triggers may still
+hit you at home.
+Stress or a slip can cause "reinstatement." One bad day can crash you back into old
+patterns.
+The reconsolidation hope
+In 2012, a study in Science by Xue and colleagues caused a stir. They showed that briefly recalling a
+drug-related memory and then extinguishing it within a 10-minute to 1-hour window seemed to
+actually update the original memory — not just add a layer on top. Heroin users in their study showed
+reduced cue-induced cravings 1, 30, and 180 days later (Xue et al., 2012).
+⚠️
+But not so fast
+The picture has gotten messier since then. Some replications failed. Struik, De Vries, and Peters
+(2019) found the procedure actually backfired for nicotine — making things worse, not better.
+Cahill, Wood, Everitt, and Milton (2019) showed that some of the original mechanistic claims
+don't hold up. Memory reconsolidation in addiction is real, but it's not the silver bullet the early
+findings hinted at.
+The "extinction burst"
+One thing every recovering person should know: when you start consistently not giving in, the
+cravings often spike harder at first. This is called an extinction burst. It's not a bad sign — it's
+actually a sign you're disrupting the old loop. The brain is essentially yelling "are you sure?" by
+ramping up the request. If you ride through it, the cravings then start fading faster than they did
+before.
+Why repeated use of QUM matters
+💡 The "Resilience Shield"
+Every time you open QUM instead of giving in to a craving, two things happen:
+You complete an extinction trial. Trigger present, reward absent, life continues. Your
+brain logs it.
+You build self-efficacy. You learn — through experience, not lectures — that you can
+get through a wave without using.
+Over enough repetitions, the baseline intensity of cravings often degrades. Not because the
+underlying sensitization (from Section 2) is gone — Robinson and Berridge (2008) note that
+sensitization persists for a long time. But the expression of that sensitization in the moment can
+be managed.
+•
+•
+1.
+2.
+
+-- 10 of 14 --
+
+Important caveat: extinction is highly context-dependent. Practicing QUM in your bedroom may not
+fully generalize to the office or a friend's house. The research suggests you need varied practice
+across multiple settings to build durable resilience (Conklin & Tiffany, 2002; Mellentin et al., 2017).
+7. Putting It All Together
+Here's the QUM logic, with the science underneath each step:
+Phase 1: Calm the body (≈ 1–3 minutes)
+What you do: A short burst of physical effort (push-ups, jumping jacks, brisk walking —
+anything that elevates your heart rate briefly), then 1–2 minutes of slow controlled breathing
+(try a 4-second inhale, 4-second hold, 6-second exhale).
+Why it works: Exercise shifts your mood through known pathways (De Jesus & Prapavessis,
+2018). Slow breathing improves heart rate variability and restores access to your prefrontal
+cortex (Zaccaro et al., 2018; Lee et al., 2025). You can't run the rest of QUM if your alarm
+system is still blaring.
+Phase 2: Hijack the mind (≈ 3–5 minutes)
+What you do: A visual-spatial task that demands real attention. Tetris, sketching, puzzle, clay
+modeling, drawing a maze.
+Why it works: Cravings need the brain's "visual sketchpad" to stay vivid. A demanding visual-
+spatial task competes for that exact resource and crashes the craving image. This is the most
+empirically solid mechanism in the whole protocol (Skorka-Brown et al., 2015; Kavanagh et al.,
+2005).
+Phase 3: Ride out the wave, build resilience
+What you do: Keep breathing slowly. Notice the wave passing. Don't congratulate yourself
+loudly or beat yourself up — just register that you got through it.
+Why it works: Each successful ride-out is an extinction trial. Over time and with varied
+practice, your brain updates its expectations (Bouton, 2004). The trigger gradually stops
+producing the same intensity of response.
+The three phases address the three levels of a craving: body (Phase 1), mind (Phase 2), and learned
+habit (Phase 3). That layered design matches what we know about how cravings actually operate.
+
+-- 11 of 14 --
+
+8. What This Doesn't Prove (Honest Limitations)
+Good science requires being clear about what we don't know. Here's an honest list:
+The integrated QUM protocol itself hasn't been tested as a single package. Each
+component has evidence behind it. Whether they combine well — additively,
+synergistically, or maybe even canceling each other out — is still an open question.
+Polyvagal Theory's anatomy is contested. Breathing exercises work; the popular
+explanation of why they work is currently under serious scientific scrutiny.
+Memory reconsolidation findings have failed to replicate in some cases. The hope that
+we can permanently "rewrite" addiction memories is still preliminary and drug-specific.
+Most studies measure short-term effects. What happens over years, with real-world chaos
+and missed practice days, is less well-studied.
+Individual differences matter a lot. Some people respond strongly to visual-spatial
+interference; others may need different approaches. Predictors of who responds to what are
+an active research area.
+Context-dependency limits generalization. Extinction learned in one place may not
+transfer to another. Practice across many settings is probably necessary for real-world
+durability.
+That said, the underlying science for the individual mechanisms is strong enough that a brief,
+smartphone-deliverable protocol like QUM is a reasonable thing to try — especially when standard
+alternatives (white-knuckle willpower, formal therapy access, medication) are hard to access in the
+moment. The research base supports the components even if the integrated protocol itself awaits
+formal trials.
+The original technical version of this review (with full neuroscience terminology and detailed
+mechanistic discussions) is available as a companion document. Everything in this plain-English
+version is grounded in the same peer-reviewed sources listed below.
+•
+•
+•
+•
+•
+•
+
+-- 12 of 14 --
+
+9. References
+Andreassen, C. S., Pallesen, S., & Griffiths, M. D. (2016). The relationship between addictive use of social media,
+narcissism, and self-esteem: Findings from a large national survey. Addictive Behaviors, 64, 287–293.
+Balhara, Y. P. S., Bhattacharjee, O., Bhatia, R. K., Sanahan, R., Ganesh, R., Sarkar, S., Grover, S., Daniyal, M. I.,
+Nebhinani, M., Dhaliwal, R. S., Ray, R., Mattoo, S. K., & Kattimani, S. (2026). Therapeutic interventions targeted at
+problematic use of digital technology: Systematic review and meta-analysis. JMIR Mental Health, 13(1), e89280.
+Berridge, K. C., & Robinson, T. E. (2016). Liking, wanting, and the incentive-sensitization theory of addiction. American
+Psychologist, 71(8), 670–679.
+Bouton, M. E. (2004). Context and behavioral processes in extinction. Learning & Memory, 11(5), 485–494.
+Bouton, M. E., Maren, S., & McNally, G. P. (2020). Behavioral and neurobiological mechanisms of Pavlovian and
+instrumental extinction learning. Physiological Reviews, 101(2), 611–681.
+Brand, M., Wegmann, E., Stark, R., Müller, A., Wölfling, K., Robbins, T. W., & Potenza, M. N. (2019). The Interaction of
+Person-Affect-Cognition-Execution (I-PACE) model for addictive behaviors. Neuroscience and Biobehavioral
+Reviews, 104, 1–10.
+Buchanan, K., Aknin, L. B., Lotun, S., & Sandstrom, G. M. (2021). Brief exposure to social media during the COVID-19
+pandemic: Doom-scrolling has negative emotional consequences, but kindness-scrolling does not. PLoS ONE, 16(10),
+e0257728.
+Cahill, E. N., Wood, M. A., Everitt, B. J., & Milton, A. L. (2019). The role of prediction error and memory destabilization
+in extinction of cued-fear within the reconsolidation window. Neuropsychopharmacology, 44(10), 1762–1768.
+Conklin, C. A., & Tiffany, S. T. (2002). Applying extinction research and theory to cue-exposure addiction treatments.
+Addiction, 97(2), 155–167.
+De Jesus, S., & Prapavessis, H. (2018). Affect and cortisol mechanisms through which acute exercise attenuates cigarette
+cravings during a temporary quit attempt. Addictive Behaviors, 80, 82–88.
+Doody, J. S., Burghardt, G. M., & Dinets, V. (2023). The evolution of sociality and the polyvagal theory. Biological
+Psychology, 180, 108569.
+Eddie, D., Nguyen, M., Zeng, K., Mei, S., & Emery, N. (2025). Heart rate variability biofeedback for substance use
+disorder: A randomized clinical trial. JAMA Psychiatry, 82(12), 1177–1185.
+Fischman, M. W., & Foltin, R. W. (1992). Self-administration of cocaine by humans: A laboratory perspective. In G. R.
+Bock & J. Whelan (Eds.), Cocaine: Scientific and Social Dimensions (pp. 165–180). Wiley.
+Grossman, P. (2023). Fundamental challenges and likely refutations of the five basic premises of the polyvagal theory.
+Biological Psychology, 180, 108589.
+Harvey, K., Kemps, E., & Tiggemann, M. (2005). The nature of imagery processes underlying food cravings. British
+Journal of Health Psychology, 10(1), 49–56.
+Kavanagh, D. J., Andrade, J., & May, J. (2005). Imaginary relish and exquisite torture: The elaborated intrusion theory of
+desire. Psychological Review, 112(2), 446–467.
+Kemps, E., Tiggemann, M., Woods, D., & Soekov, B. (2004). Reduction of food cravings through concurrent visuo-spatial
+processing. International Journal of Eating Disorders, 36(1), 31–40.
+Lee, D., Yamazaki, Y., Kuwamizu, R., Okamoto, M., & Soya, H. (2025). Prefrontal executive function enhanced by prior
+acute inhalation of low-dose hypoxic gas: Modulation via cardiac vagal activity. NeuroImage, 310, 121139.
+Ma, X., Wang, M., Zhou, W., Zhang, Z., Ni, H., Jiang, A., Zheng, Y., Du, X., Potenza, M. N., & Dong, G. H. (2024).
+Wanting-liking dissociation and altered dopaminergic functioning: Similarities between internet gaming disorder and
+tobacco use disorder. Journal of Behavioral Addictions, 13(2), 596–609.
+May, J., Andrade, J., Panabokke, N., & Kavanagh, D. (2010). Visuospatial tasks suppress craving for cigarettes. Behaviour
+Research and Therapy, 48(6), 476–485.
+
+-- 13 of 14 --
+
+May, J., Kavanagh, D. J., & Andrade, J. (2015). The Elaborated Intrusion Theory of desire: A 10-year retrospective and
+implications for addiction treatments. Addictive Behaviors, 44, 29–34.
+Mellentin, A. I., Skøt, L., Nielsen, B., Schippers, G. M., Nielsen, A. S., Stenager, E., & Juhl, C. (2017). Cue exposure
+therapy for the treatment of alcohol use disorders: A meta-analytic review. Clinical Psychology Review, 57, 195–207.
+Nagata, J. M., Bao, K., Murray, S. B., Nedelec, P., Richardson, R. A., Nayak, S., Breland, D. J., Ganson, K. T., Troncoso,
+K. C., Baker, F. C., & Sugrue, L. P. (2026). Social media use and early adolescent brain structure: Findings from the
+Adolescent Brain Cognitive Development (ABCD) Study. NeuroImage, 331, 121860.
+Neuhuber, W., & Berthoud, H. R. (2022). Functional anatomy of the vagus system: How does the polyvagal theory
+comply? Biological Psychology, 174, 108425.
+Porges, S. W. (2007). The polyvagal perspective. Biological Psychology, 74(2), 116–143.
+Robinson, M. J. F., Fischer, A. M., Ahuja, A., Lesser, E. N., & Maniates, H. (2016). Roles of "wanting" and "liking" in
+motivating behavior: Gambling, food, and drug addictions. Current Topics in Behavioral Neurosciences, 27, 105–136.
+Robinson, T. E., & Berridge, K. C. (1993). The neural basis of drug craving: An incentive-sensitization theory of addiction.
+Brain Research Reviews, 18(3), 247–291.
+Robinson, T. E., & Berridge, K. C. (2008). The incentive sensitization theory of addiction: Some current issues.
+Philosophical Transactions of the Royal Society B, 363(1507), 3137–3146.
+Robinson, T. E., & Berridge, K. C. (2024). The incentive-sensitization theory of addiction 30 years on. Annual Review of
+Psychology, 76, 29–58.
+Scerbo, F., Faulkner, G., Taylor, A., & Thomas, S. (2010). Effects of exercise on cravings to smoke: The role of exercise
+intensity and cortisol. Journal of Sports Sciences, 28(1), 11–19.
+Skorka-Brown, J., Andrade, J., & May, J. (2014). Playing 'Tetris' reduces the strength, frequency and vividness of naturally
+occurring cravings. Appetite, 76, 161–165.
+Skorka-Brown, J., Andrade, J., Whalley, B., & May, J. (2015). Playing Tetris decreases drug and other cravings in real
+world settings. Addictive Behaviors, 51, 165–170.
+Struik, R. F., De Vries, T. J., & Peters, J. (2019). Detrimental effects of a retrieval-extinction procedure on nicotine seeking,
+but not cocaine seeking. Frontiers in Behavioral Neuroscience, 13, 243.
+Thayer, J. F., Hansen, A. L., Saus-Rose, E., & Johnsen, B. H. (2009). Heart rate variability, prefrontal neural function, and
+cognitive performance: The neurovisceral integration perspective. Annals of Behavioral Medicine, 37(2), 141–153.
+Tiggemann, M., Kemps, E., & Parnell, J. (2010). The selective impact of chocolate craving on visuospatial working
+memory. Appetite, 55(1), 44–48.
+Xue, Y.-X., Luo, Y.-X., Wu, P., Shi, H.-S., Xue, L.-F., Chen, C., Zhu, W.-L., Ding, Z.-B., Bao, Y.-P., Shi, J., Epstein, D. H.,
+Shaham, Y., & Lu, L. (2012). A memory retrieval-extinction procedure to prevent drug craving and relapse. Science,
+336(6078), 241–245.
+Zaccaro, A., Piarulli, A., Laurino, M., Garbella, E., Menicucci, D., Neri, B., & Gemignani, A. (2018). How breath-control
+can change your life: A systematic review on psycho-physiological correlates of slow breathing. Frontiers in Human
+Neuroscience, 12, 353.
+Zhai, G., Feng, Y., Ling, X., Su, J., Liu, Y., Li, Y., Jiang, Y., & Wu, X. (2025). The sacrifice of alerting in active short video
+users. Neuropsychologia, 219, 109291.
+
+-- 14 of 14 --
+

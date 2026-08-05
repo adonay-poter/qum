@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">QUM</string>
+    <string name="title_activity_main">QUM</string>
+    <string name="package_name">com.arch.surf</string>
+    <string name="custom_url_scheme">com.arch.surf</string>
+</resources>

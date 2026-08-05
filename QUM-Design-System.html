@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>QUM Design System · Indie Festival v1.0</title>
+<meta name="description" content="Publish-ready brand and component system for QUM — colors, typography, grid, 30+ components, tokens, and dev guide."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="design-system/qum-ds.css"/>
+<style>
+  @font-face {
+    font-family: 'Bela Bereka';
+    src: url('public/fonts/BelaBereka.ttf') format('truetype');
+    font-weight: 400 900;
+    font-display: block;
+  }
+</style>
+</head>
+<body>
+<div class="ds-shell">
+  <aside class="ds-nav">
+    <div class="ds-logo">
+      <span class="glyph t-am" aria-hidden="true">ቁም</span>
+      <span class="word">QUM</span>
+    </div>
+    <p class="t-caption" style="margin:0 0 24px">Design System v1.0<br/>Indie Festival</p>
+    <nav>
+      <div class="ds-nav-group">
+        <div class="ds-nav-label">Foundations</div>
+        <a href="#hero">Overview</a>
+        <a href="#principles">Principles</a>
+        <a href="#colors">Color</a>
+        <a href="#typography">Typography</a>
+        <a href="#spacing">Spacing & Grid</a>
+        <a href="#motion">Motion</a>
+      </div>
+      <div class="ds-nav-group">
+        <div class="ds-nav-label">Identity</div>
+        <a href="#identity">Brand marks</a>
+      </div>
+      <div class="ds-nav-group">
+        <div class="ds-nav-label">Components</div>
+        <a href="#actions">Actions</a>
+        <a href="#forms">Forms</a>
+        <a href="#feedback">Feedback</a>
+        <a href="#structure">Structure</a>
+        <a href="#navigation">Navigation</a>
+        <a href="#data">Data display</a>
+        <a href="#qum-specific">QUM-specific</a>
+      </div>
+      <div class="ds-nav-group">
+        <div class="ds-nav-label">Guidance</div>
+        <a href="#patterns">Patterns</a>
+        <a href="#dodont">Do & Don't</a>
+        <a href="#tokens">Tokens</a>
+        <a href="#dev">Dev guide</a>
+      </div>
+    </nav>
+    <p class="ds-nav-meta">DOC.DS/26.05 · PUBLISH-READY</p>
+  </aside>
+
+  <div class="toolbar-top">
+    <button type="button" class="btn btn-secondary" id="theme-toggle">Light preview</button>
+  </div>
+
+  <main class="ds-main">
+    <!-- HERO -->
+    <section class="ds-section ds-hero" id="hero">
+      <div class="grid-bg" aria-hidden="true"></div>
+      <div class="ds-hero-inner">
+        <p class="eyebrow">QUM · Indie Festival</p>
+        <h1 class="t-display-xl">Design<br/>System</h1>
+        <p class="section-lede t-body-lg">
+          A film-festival microsite system for the QUM protocol app: mono everywhere, one spotlight orange,
+          negative space as composition. Aligned with <code>Design.md</code> and production tokens in
+          <code>src/design-system/tokens.ts</code>.
+        </p>
+        <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap">
+          <span class="badge badge-accent">v1.0.0</span>
+          <span class="badge">30+ components</span>
+          <span class="badge">WCAG AA target</span>
+          <span class="badge">8px base grid</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section class="ds-section" id="principles">
+      <p class="eyebrow">01 · Principles</p>
+      <h2 class="t-h1">How we design</h2>
+      <p class="section-lede">Five load-bearing principles. Break one and the brand reads as generic wellness UI.</p>
+      <div class="principle-grid">
+        <article class="principle-card"><p class="num">01</p><h3 class="t-h3">One spotlight</h3><p class="t-caption">Tertiary orange drives exactly one primary action per screen — plus reserved identity uses (ቁም, Halt Bar).</p></article>
+        <article class="principle-card"><p class="num">02</p><h3 class="t-h3">Flat & mono</h3><p class="t-caption">IBM Plex Mono for UI copy. No gradients. Surfaces stack via value, not blur.</p></article>
+        <article class="principle-card"><p class="num">03</p><h3 class="t-h3">Festival grid</h3><p class="t-caption">12 columns, 8px rhythm, hairline borders. Schedule-board clarity under stress.</p></article>
+        <article class="principle-card"><p class="num">04</p><h3 class="t-h3">Bilingual dignity</h3><p class="t-caption">Amharic glyph in Bela Bereka / Noto Ethiopic — never reduced to decoration.</p></article>
+        <article class="principle-card"><p class="num">05</p><h3 class="t-h3">Calm under urge</h3><p class="t-caption">Motion is purposeful (breath, halt, victory). Reduced motion respected.</p></article>
+      </div>
+    </section>
+
+    <!-- COLORS -->
+    <section class="ds-section" id="colors">
+      <p class="eyebrow">02 · Color</p>
+      <h2 class="t-h1">Color system</h2>
+      <p class="section-lede">Dark mode is default (app shell). Semantic colors stay muted — never compete with accent.</p>
+      <h3 class="t-h3" style="margin-top:32px">Primary palette</h3>
+      <div class="swatch-grid" style="margin-top:16px">
+        <div class="swatch"><div class="swatch-chip" style="background:#0E0D0A"></div><div class="swatch-meta"><div class="name">neutral / bg</div><div class="hex">#0E0D0A</div><span class="contrast-badge">Foundation</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#161410"></div><div class="swatch-meta"><div class="name">surface</div><div class="hex">#161410</div></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#E8E4DB"></div><div class="swatch-meta"><div class="name">primary / ink</div><div class="hex">#E8E4DB</div><span class="contrast-badge">7.8:1 on bg</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#857F72"></div><div class="swatch-meta"><div class="name">secondary</div><div class="hex">#857F72</div><span class="contrast-badge">4.6:1 captions</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#FF6B1A"></div><div class="swatch-meta"><div class="name">tertiary / accent</div><div class="hex">#FF6B1A</div><span class="contrast-badge">Reserve</span></div></div>
+      </div>
+      <h3 class="t-h3" style="margin-top:32px">Semantic</h3>
+      <div class="swatch-grid" style="margin-top:16px">
+        <div class="swatch"><div class="swatch-chip" style="background:#B8D4B0"></div><div class="swatch-meta"><div class="name">success</div><div class="hex">#B8D4B0</div></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#D4C4A0"></div><div class="swatch-meta"><div class="name">warning</div><div class="hex">#D4C4A0</div></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#D4A8A0"></div><div class="swatch-meta"><div class="name">error</div><div class="hex">#D4A8A0</div></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#A8B8D4"></div><div class="swatch-meta"><div class="name">info</div><div class="hex">#A8B8D4</div></div></div>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section class="ds-section" id="typography">
+      <p class="eyebrow">03 · Typography</p>
+      <h2 class="t-h1">Nine-level scale</h2>
+      <p class="section-lede">Responsive clamp on display levels. Minimum 16px effective for inputs on mobile.</p>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:20px">
+        <div><span class="t-label">display-xl</span><p class="t-display-xl" style="margin:8px 0 0">Stand. Halt.</p></div>
+        <div><span class="t-label">display</span><p class="t-display" style="margin:8px 0 0">Break the loop</p></div>
+        <div><span class="t-label">h1</span><p class="t-h1" style="margin:8px 0 0">Phase 1 · Stillness</p></div>
+        <div><span class="t-label">h2</span><p class="t-h2" style="margin:8px 0 0">Your resilience window</p></div>
+        <div><span class="t-label">h3</span><p class="t-h3" style="margin:8px 0 0">Commitment active</p></div>
+        <div><span class="t-label">body-lg</span><p class="t-body-lg" style="margin:8px 0 0">Ten minutes. Three phases.</p></div>
+        <div><span class="t-label">body</span><p class="t-body" style="margin:8px 0 0">Urges peak and pass.</p></div>
+        <div><span class="t-label">caption</span><p class="t-caption" style="margin:8px 0 0">Last synced 4m ago</p></div>
+        <div><span class="t-label">label</span><p class="t-label" style="margin:8px 0 0">Email · Password</p></div>
+      </div>
+    </section>
+
+    <!-- SPACING -->
+    <section class="ds-section" id="spacing">
+      <p class="eyebrow">04 · Layout</p>
+      <h2 class="t-h1">8px spacing · 12-column grid</h2>
+      <div class="spacing-row">
+        <div><div class="space-block" style="width:8px;height:8px"></div><div class="space-label">1·8</div></div>
+        <div><div class="space-block" style="width:16px;height:16px"></div><div class="space-label">2·16</div></div>
+        <div><div class="space-block" style="width:32px;height:32px"></div><div class="space-label">4·32</div></div>
+        <div><div class="space-block" style="width:64px;height:64px"></div><div class="space-label">8·64</div></div>
+      </div>
+      <div class="grid-demo">
+        <div class="col" style="grid-column:span 12">12</div>
+        <div class="col" style="grid-column:span 8">8</div><div class="col" style="grid-column:span 4">4</div>
+        <div class="col" style="grid-column:span 6">6</div><div class="col" style="grid-column:span 6">6</div>
+      </div>
+    </section>
+
+    <section class="ds-section" id="motion">
+      <p class="eyebrow">05 · Motion</p>
+      <h2 class="t-h1">Duration & easing</h2>
+      <p class="section-lede">fast 120ms · base 200ms · slow 400ms. Honor prefers-reduced-motion.</p>
+    </section>
+
+    <section class="ds-section" id="identity">
+      <p class="eyebrow">06 · Identity</p>
+      <h2 class="t-h1">Brand marks</h2>
+      <div class="comp-row">
+        <div class="comp-demo">
+          <div class="lockup">
+            <div class="lockup-row">
+              <span class="t-am" style="font-size:44px;color:var(--accent)">ቁም</span>
+              <span class="hairline" style="height:34px"></span>
+              <span style="font-size:28px;font-weight:600;letter-spacing:0.14em">QUM</span>
+            </div>
+            <span class="tagline">Stand. Halt.</span>
+          </div>
+          <span class="halt-bar" style="width:6px;height:32px" aria-hidden="true"></span>
+          <div class="app-icon-demo"><span class="halt-bar" style="width:10px;height:40px"></span><span class="corner-glyph t-am">ቁም</span><span class="corner-qum">QUM</span></div>
+        </div>
+        <div class="comp-spec"><h4>Lockup · Halt Bar · App Icon</h4><pre>&lt;BilingualLockup size="md" /&gt;
+&lt;HaltBar height={32} /&gt;
+&lt;AppIcon size={512} /&gt;</pre></div>
+      </div>
+    </section>
+    <section class="ds-section" id="actions">
+      <p class="eyebrow">07 · Actions</p>
+      <h2 class="t-h1">Buttons & links</h2>
+      <div class="comp-row"><div class="comp-demo">
+        <button type="button" class="btn btn-primary">Sign in</button>
+        <button type="button" class="btn btn-primary" disabled>Disabled</button>
+        <button type="button" class="btn btn-primary btn-loading" aria-busy="true">Loading</button>
+      </div><div class="comp-spec"><h4>Button Primary</h4><dl><dt>States</dt><dd>default, hover, disabled, loading</dd><dt>A11y</dt><dd>aria-busy when loading; 44px min touch</dd></dl><pre>className="bg-tertiary px-5 py-3 text-body font-semibold text-on-primary"</pre></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <button type="button" class="btn btn-secondary">Cancel</button>
+        <button type="button" class="btn btn-ghost">New here? Create account</button>
+        <button type="button" class="btn btn-destructive">Break commitment</button>
+        <button type="button" class="btn btn-icon" aria-label="Settings">⚙</button>
+      </div><div class="comp-spec"><h4>Secondary · Ghost · Destructive · Icon</h4><dl><dt>Rule</dt><dd>Only one btn-primary per view</dd></dl></div></div>
+      <div class="comp-row"><div class="comp-demo"><a href="#" class="btn btn-ghost">Urge passed →</a></div><div class="comp-spec"><h4>Link</h4><dl><dt>Style</dt><dd>text-secondary underline on hover</dd></dl></div></div>
+    </section>
+
+    <section class="ds-section" id="forms">
+      <p class="eyebrow">08 · Forms</p>
+      <h2 class="t-h1">Inputs & controls</h2>
+      <div class="comp-row"><div class="comp-demo">
+        <label class="field-label t-label">Email</label>
+        <input class="input" type="email" placeholder="you@example.com" />
+        <input class="input error" type="email" value="bad" aria-invalid="true" style="margin-top:8px" />
+      </div><div class="comp-spec"><h4>Text Input</h4><dl><dt>Focus</dt><dd>border-tertiary</dd><dt>Error</dt><dd>aria-invalid + error border</dd></dl><pre>border border-secondary/40 bg-surface px-qum-md py-3 focus:border-tertiary</pre></div></div>
+      <div class="comp-row"><div class="comp-demo"><textarea class="textarea" placeholder="Letter to future self…"></textarea></div><div class="comp-spec"><h4>Textarea</h4></div></div>
+      <div class="comp-row"><div class="comp-demo"><select class="select"><option>Phase 1 · Stillness</option><option>Phase 1 · Cold</option></select></div><div class="comp-spec"><h4>Select</h4></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <label class="check"><input type="checkbox" checked /> Voice memo in wave</label>
+        <label class="radio"><input type="radio" name="d" checked /> Option A</label>
+        <label class="radio"><input type="radio" name="d" /> Option B</label>
+        <div class="switch on" aria-checked="true"></div>
+        <input type="range" class="range" min="0" max="100" value="60" aria-label="Volume" />
+      </div><div class="comp-spec"><h4>Checkbox · Radio · Switch · Slider</h4><dl><dt>Switch</dt><dd>role=switch, keyboard Space/Enter</dd></dl></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="search-wrap"><input type="search" placeholder="Search waves…" /><button type="button" aria-label="Search">⌕</button></div>
+      </div><div class="comp-spec"><h4>Search</h4></div></div>
+    </section>
+
+    <section class="ds-section" id="feedback">
+      <p class="eyebrow">09 · Feedback</p>
+      <h2 class="t-h1">Status & overlay</h2>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="alert alert-info">Calm Hour starts in 20 minutes.</div>
+        <div class="alert alert-success" style="margin-top:8px">Wave complete — urge passed.</div>
+        <div class="alert alert-warning" style="margin-top:8px">Commitment override requires reason.</div>
+        <div class="alert alert-error" style="margin-top:8px">Sign-in failed. Check password.</div>
+      </div><div class="comp-spec"><h4>Alert / Banner</h4><dl><dt>Anatomy</dt><dd>border + caption text; no icon required</dd></dl></div></div>
+      <div class="comp-row"><div class="comp-demo"><div class="toast"><span class="dot"></span><span>Wave ended · +12 resilience</span></div></div><div class="comp-spec"><h4>Toast</h4><dl><dt>Use</dt><dd>WaveEndToast — transient, non-blocking</dd></dl></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <span class="badge">Default</span>
+        <span class="badge badge-accent">Active wave</span>
+        <span class="badge badge-success">Verified</span>
+        <span class="badge badge-error">Crisis</span>
+      </div><div class="comp-spec"><h4>Badge</h4></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="modal-backdrop"><div class="modal" role="dialog" aria-labelledby="mdl1"><h3 class="t-h3" id="mdl1">Exit wave?</h3><p class="t-caption">Progress saves if you confirm.</p><div style="margin-top:16px;display:flex;gap:8px"><button class="btn btn-primary">Stay</button><button class="btn btn-secondary">Exit</button></div></div></div>
+      </div><div class="comp-spec"><h4>Modal</h4><dl><dt>A11y</dt><dd>role=dialog, labelled heading, focus trap in app</dd></dl></div></div>
+      <div class="comp-row"><div class="comp-demo"><div class="sheet"><div class="handle"></div><p class="t-h3">Resilience breakdown</p><p class="t-caption">Rolling 7-day window</p></div></div><div class="comp-spec"><h4>Sheet</h4><dl><dt>Use</dt><dd>ResilienceBreakdownSheet pattern</dd></dl></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="progress" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"><div class="progress-fill" id="demo-progress" style="width:35%"></div></div>
+      </div><div class="comp-spec"><h4>Progress · Session timer</h4><pre>bg-tertiary h-full transition-all duration-1000</pre></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div style="width:200px"><div class="skeleton" style="height:12px;width:70%"></div><div class="skeleton" style="height:32px;width:40%;margin-top:8px"></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="halt-bar" style="width:5px;height:24px"></span><span class="t-caption">HaltBarLoader</span></div>
+      </div><div class="comp-spec"><h4>Skeleton</h4><dl><dt>A11y</dt><dd>aria-busy aria-label on container</dd></dl></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="tooltip-wrap"><button class="btn btn-secondary">Resilience</button><span class="tooltip" role="tooltip">7-day rolling score</span></div>
+      </div><div class="comp-spec"><h4>Tooltip</h4></div></div>
+    </section>
+
+    <section class="ds-section" id="structure">
+      <p class="eyebrow">10 · Structure</p>
+      <h2 class="t-h1">Containers & lists</h2>
+      <div class="comp-row"><div class="comp-demo"><div class="card"><h3 class="t-h3">Solidarity</h3><p class="t-caption">3 people riding a wave now</p></div><div class="card card-elevated"><p class="t-caption">Raised surface</p></div></div><div class="comp-spec"><h4>Card</h4><pre>border border-secondary/30 bg-surface p-qum-md</pre></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <span class="chip">Phase 2 <button type="button" aria-label="Remove">×</button></span>
+        <div class="avatar">AM</div>
+        <div class="avatar lg">Q</div>
+      </div><div class="comp-spec"><h4>Chip · Avatar</h4></div></div>
+      <div class="comp-row"><div class="comp-demo"><div class="divider"></div><div class="divider-label">or</div></div><div class="comp-spec"><h4>Divider</h4></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="tabs" role="tablist"><button class="tab active" role="tab" aria-selected="true">Waves</button><button class="tab" role="tab" aria-selected="false">Patterns</button><button class="tab" role="tab" aria-selected="false">Calm</button></div>
+      </div><div class="comp-spec"><h4>Tabs</h4></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="accordion">
+          <div class="accordion-item open"><button class="accordion-trigger" aria-expanded="true">What is a wave? <span>−</span></button><div class="accordion-panel">A timed 3-phase urge protocol.</div></div>
+          <div class="accordion-item"><button class="accordion-trigger" aria-expanded="false">Commitments <span>+</span></button><div class="accordion-panel">Hold count and override rules.</div></div>
+        </div>
+      </div><div class="comp-spec"><h4>Accordion</h4></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="list"><div class="list-item"><span>Wave · 2h ago</span><span class="t-caption">✓</span></div><div class="list-item"><span>Wave · yesterday</span><span class="t-caption">✓</span></div></div>
+        <div class="empty" style="margin-top:16px"><p class="t-h3">No waves yet</p><p class="t-caption">Start when an urge hits.</p><button class="btn btn-primary" style="margin-top:12px">Begin wave</button></div>
+      </div><div class="comp-spec"><h4>List · Empty state</h4></div></div>
+    </section>
+
+    <section class="ds-section" id="navigation">
+      <p class="eyebrow">11 · Navigation</p>
+      <h2 class="t-h1">Wayfinding</h2>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="nav-bar"><span class="halt-bar" style="width:4px;height:20px"></span><span class="t-label">QUM</span><button class="btn btn-ghost">Settings</button></div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#">Home</a><span class="sep">/</span><a href="#">Waves</a><span class="sep">/</span><span>Detail</span></nav>
+        <div class="pagination"><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">›</button></div>
+        <div class="segmented"><button class="active">Day</button><button>Week</button><button>Month</button></div>
+      </div><div class="comp-spec"><h4>Nav bar · Breadcrumb · Pagination · Segmented</h4><dl><dt>AppHeader</dt><dd>CompactLockup + actions</dd></dl></div></div>
+    </section>
+
+    <section class="ds-section" id="data">
+      <p class="eyebrow">12 · Data</p>
+      <h2 class="t-h1">Charts & metrics</h2>
+      <div class="comp-row"><div class="comp-demo">
+        <svg class="sparkline" viewBox="0 0 280 48" aria-hidden="true"><path d="M4,40 L30,28 L60,32 L90,12 L120,20 L150,8 L180,24 L210,16 L240,28 L270,20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="heatmap">
+          <div class="cell on" style="--intensity:0.9"></div><div class="cell on" style="--intensity:0.5"></div><div class="cell"></div><div class="cell on" style="--intensity:0.3"></div>
+          <div class="cell"></div><div class="cell on" style="--intensity:0.7"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell on" style="--intensity:1"></div><div class="cell"></div><div class="cell on" style="--intensity:0.4"></div><div class="cell"></div>
+        </div>
+      </div><div class="comp-spec"><h4>Sparkline · Heatmap</h4><dl><dt>Used in</dt><dd>SolidarityCard, UrgeHeatmap, PatternBreakdown</dd></dl></div></div>
+    </section>
+
+    <section class="ds-section" id="qum-specific">
+      <p class="eyebrow">13 · QUM</p>
+      <h2 class="t-h1">Protocol components</h2>
+      <div class="comp-row"><div class="comp-demo"><button type="button" class="urge-cta" aria-label="Begin wave">Halt</button></div><div class="comp-spec"><h4>Urge CTA</h4><dl><dt>Motion</dt><dd>animate-urge-pulse; one per home</dd><dt>A11y</dt><dd>Descriptive aria-label</dd></dl></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <div class="card" style="border-color:rgba(255,107,26,0.4)"><p class="t-body">Your email is confirmed. Sign in to continue.</p></div>
+      </div><div class="comp-spec"><h4>Verified banner</h4><pre>border-tertiary/40 bg-surface</pre></div></div>
+      <div class="comp-row"><div class="comp-demo">
+        <p class="t-label">Session header offset</p>
+        <p class="t-caption">qum-session-pt = safe-top + 3.25rem header + 0.75rem</p>
+      </div><div class="comp-spec"><h4>Safe area · Page shell</h4><dl><dt>Classes</dt><dd>qum-safe-pt, qum-app-shell, capacitor-native overrides</dd></dl></div></div>
+    </section>
+
+    <section class="ds-section" id="patterns">
+      <p class="eyebrow">14 · Patterns</p>
+      <h2 class="t-h1">Screen patterns</h2>
+      <div class="pattern-card"><h4 class="t-h3">Auth stack</h4><p class="t-caption">BilingualLockup (md, start-aligned) → h1 → body → form → single primary CTA → ghost link.</p></div>
+      <div class="pattern-card"><h4 class="t-h3">Wave flow</h4><p class="t-caption">Full-bleed neutral bg, SessionTimer progress, phase title h1, verifier control, accent only on commit action.</p></div>
+      <div class="pattern-card"><h4 class="t-h3">Settings list</h4><p class="t-caption">List items with chevron, secondary captions, no accent until destructive confirm.</p></div>
+      <div class="pattern-card"><h4 class="t-h3">Crisis support</h4><p class="t-caption">Error semantic for urgency copy; hotline list — never orange decorative noise.</p></div>
+      <div class="pattern-card"><h4 class="t-h3">Loading analytics</h4><p class="t-caption">HaltBarLoader centered + skeleton bars; aria-busy on parent.</p></div>
+    </section>
+
+    <section class="ds-section" id="dodont">
+      <p class="eyebrow">15 · Guidance</p>
+      <h2 class="t-h1">Do & Don't</h2>
+      <div class="dodont">
+        <div class="dodont-col do"><h3>Do</h3><ul>
+          <li>Use tertiary for exactly one action per screen.</li>
+          <li>Let neutral carry composition — negative space is a feature.</li>
+          <li>Pair labels with inputs; expose errors to assistive tech.</li>
+          <li>Keep Amharic glyph in accent at lockup sizes only.</li>
+          <li>Mirror tokens from tokens.ts / tokens.json in Tailwind.</li>
+        </ul></div>
+        <div class="dodont-col dont"><h3>Don't</h3><ul>
+          <li>Introduce gradients — flat on purpose.</li>
+          <li>Mix tertiary with alternate accent colors.</li>
+          <li>Stack multiple pulsing urge CTAs.</li>
+          <li>Use rounded corners beyond lg (4px).</li>
+          <li>Ship decorative orange icons in lists.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section class="ds-section" id="tokens">
+      <p class="eyebrow">16 · Tokens</p>
+      <h2 class="t-h1">Design tokens JSON</h2>
+      <p class="section-lede">Source: <code>src/design-system/tokens.json</code> — W3C-style format for tooling.</p>
+      <div class="tokens-block"><pre id="tokens-json">Loading tokens…</pre></div>
+      <button type="button" class="copy-btn" id="copy-tokens">Copy tokens JSON</button>
+    </section>
+
+    <section class="ds-section" id="dev">
+      <p class="eyebrow">17 · Dev guide</p>
+      <h2 class="t-h1">Implementation</h2>
+      <div class="pattern-card">
+        <h4 class="t-h3">Stack</h4>
+        <p class="t-caption">React 18 + Vite + Tailwind. Import tokens from <code>@/design-system/tokens</code>. Identity from <code>@/design-system/identity</code>.</p>
+      </div>
+      <div class="pattern-card">
+        <h4 class="t-h3">Tailwind mapping</h4>
+        <pre style="margin:0;font-size:11px;color:var(--ink-dim)">colors: primary, secondary, tertiary, neutral, surface, on-primary
+fontFamily: mono (IBM Plex Mono), bela (Bela Bereka)
+spacing: qum-sm (8), qum-md (16), qum-lg (32)
+fontSize: display, h1, body, label</pre>
+      </div>
+      <div class="pattern-card">
+        <h4 class="t-h3">Accent budget (enforced in review)</h4>
+        <p class="t-caption">Per route: count elements with bg-tertiary / text-tertiary decorative use. Max one bg-tertiary button unless identity loader.</p>
+      </div>
+      <div class="pattern-card">
+        <h4 class="t-h3">Publish this doc</h4>
+        <p class="t-caption">Open <code>QUM-Design-System.html</code> from repo root (requires <code>design-system/</code> sibling folder). Serve via <code>npx serve .</code> or static host. Fonts: Google CDN + optional Bela Bereka at public/fonts.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+<script id="embedded-tokens" type="application/json">
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "meta": {
+    "name": "QUM Design System",
+    "version": "1.0.0",
+    "theme": "Indie Festival",
+    "description": "Film-festival grid: mono schedule, spotlight orange. Accent reserved for ቁም, Halt Bar, and one primary action per screen."
+  },
+  "color": {
+    "bg": { "value": "#0E0D0A", "type": "color", "description": "Page foundation" },
+    "bg-elevated": { "value": "#14120E", "type": "color" },
+    "surface": { "value": "#161410", "type": "color", "description": "Cards, inputs, panels" },
+    "surface-raised": { "value": "#1C1A14", "type": "color" },
+    "primary": { "value": "#E8E4DB", "type": "color", "description": "Headlines and core text" },
+    "primary-dim": { "value": "#B6B0A2", "type": "color" },
+    "secondary": { "value": "#857F72", "type": "color", "description": "Borders, captions, metadata" },
+    "secondary-faint": { "value": "#5B5648", "type": "color" },
+    "accent": { "value": "#FF6B1A", "type": "color", "description": "Tertiary — sole interaction driver" },
+    "accent-pressed": { "value": "#C8480B", "type": "color" },
+    "on-accent": { "value": "#0E0D0A", "type": "color" },
+    "line-1": { "value": "rgba(232, 228, 219, 0.08)", "type": "color" },
+    "line-2": { "value": "rgba(232, 228, 219, 0.14)", "type": "color" },
+    "line-3": { "value": "rgba(232, 228, 219, 0.22)", "type": "color" },
+    "semantic": {
+      "success": { "value": "#B8D4B0", "type": "color" },
+      "warning": { "value": "#D4C4A0", "type": "color" },
+      "error": { "value": "#D4A8A0", "type": "color" },
+      "info": { "value": "#A8B8D4", "type": "color" }
+    },
+    "light-mode": {
+      "bg": { "value": "#F5F3EE", "type": "color" },
+      "surface": { "value": "#FFFFFF", "type": "color" },
+      "primary": { "value": "#0E0D0A", "type": "color" },
+      "secondary": { "value": "#5B5648", "type": "color" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "mono": { "value": "'IBM Plex Mono', ui-monospace, monospace", "type": "fontFamily" },
+      "amharic": { "value": "'Bela Bereka', 'Noto Sans Ethiopic', serif", "type": "fontFamily" }
+    },
+    "scale": {
+      "display-xl": { "value": { "fontSize": "4.5rem", "lineHeight": "1.05", "fontWeight": 700, "letterSpacing": "-0.03em" }, "type": "typography" },
+      "display": { "value": { "fontSize": "3.5rem", "lineHeight": "1.1", "fontWeight": 700, "letterSpacing": "-0.02em" }, "type": "typography" },
+      "h1": { "value": { "fontSize": "1.85rem", "lineHeight": "1.2", "fontWeight": 600 }, "type": "typography" },
+      "h2": { "value": { "fontSize": "1.35rem", "lineHeight": "1.25", "fontWeight": 600 }, "type": "typography" },
+      "h3": { "value": { "fontSize": "1.1rem", "lineHeight": "1.3", "fontWeight": 600 }, "type": "typography" },
+      "body-lg": { "value": { "fontSize": "1.05rem", "lineHeight": "1.55", "fontWeight": 400 }, "type": "typography" },
+      "body": { "value": { "fontSize": "0.92rem", "lineHeight": "1.55", "fontWeight": 400 }, "type": "typography" },
+      "caption": { "value": { "fontSize": "0.78rem", "lineHeight": "1.45", "fontWeight": 400 }, "type": "typography" },
+      "label": { "value": { "fontSize": "0.7rem", "lineHeight": "1.4", "fontWeight": 500, "letterSpacing": "0.12em", "textTransform": "uppercase" }, "type": "typography" }
+    }
+  },
+  "space": {
+    "unit": { "value": "8px", "type": "dimension", "description": "Base grid unit" },
+    "0": { "value": "0", "type": "dimension" },
+    "1": { "value": "8px", "type": "dimension" },
+    "2": { "value": "16px", "type": "dimension" },
+    "3": { "value": "24px", "type": "dimension" },
+    "4": { "value": "32px", "type": "dimension" },
+    "5": { "value": "40px", "type": "dimension" },
+    "6": { "value": "48px", "type": "dimension" },
+    "8": { "value": "64px", "type": "dimension" },
+    "10": { "value": "80px", "type": "dimension" },
+    "12": { "value": "96px", "type": "dimension" }
+  },
+  "radius": {
+    "sm": { "value": "0px", "type": "borderRadius" },
+    "md": { "value": "2px", "type": "borderRadius" },
+    "lg": { "value": "4px", "type": "borderRadius" }
+  },
+  "grid": {
+    "columns": { "value": 12, "type": "number" },
+    "gutter": { "value": "24px", "type": "dimension" },
+    "margin": { "value": "clamp(20px, 4vw, 56px)", "type": "dimension" },
+    "maxWidth": { "value": "1280px", "type": "dimension" }
+  },
+  "motion": {
+    "duration-fast": { "value": "120ms", "type": "duration" },
+    "duration-base": { "value": "200ms", "type": "duration" },
+    "duration-slow": { "value": "400ms", "type": "duration" },
+    "ease-standard": { "value": "cubic-bezier(0.4, 0, 0.2, 1)", "type": "cubicBezier" }
+  },
+  "identity": {
+    "amharicGlyph": { "value": "ቁም", "type": "string" },
+    "tagline": { "value": "Stand. Halt.", "type": "string" },
+    "haltBarRatio": { "value": 0.2, "type": "number", "description": "Bar width = height × ratio, min 3px" }
+  }
+}
+
+</script>
+<script src="design-system/qum-ds.js"></script>
+</body>
+</html>
