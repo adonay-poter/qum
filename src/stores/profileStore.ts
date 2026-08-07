@@ -174,7 +174,14 @@ export const useProfileStore = create<ProfileStore>((set, get) => ({
       return get().profile;
     }
 
-    await get().recomputeResilience(userId);
-    return get().profile;
+    const ensured = await ensureProfile(userId);
+    if (ensured) {
+      get().setProfile(ensured);
+      set({ userId });
+      await get().recomputeResilience(userId);
+      return get().profile;
+    }
+
+    return null;
   },
 }));

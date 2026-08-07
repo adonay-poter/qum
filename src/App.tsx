@@ -70,6 +70,12 @@ export default function App() {
 
     let cancelled = false;
     setProfileReady(false);
+
+    // Fallback: Ensure PWA never hangs on loading screen if network profile load stalls
+    const timeout = setTimeout(() => {
+      if (!cancelled) setProfileReady(true);
+    }, 3500);
+
     try {
       useWaveStore.getState().hydrate();
       useCommitmentStore.getState().hydrate(user.id);
@@ -86,11 +92,13 @@ export default function App() {
       .loadProfile(user.id, { force: true })
       .catch((err) => console.error('loadProfile', err))
       .finally(() => {
+        clearTimeout(timeout);
         if (!cancelled) setProfileReady(true);
       });
 
     return () => {
       cancelled = true;
+      clearTimeout(timeout);
     };
   }, [user?.id]);
 

@@ -99,24 +99,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener('qum:auth-verified', onVerified);
 
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      const sessionUser = data.session?.user ?? null;
-      setUser(sessionUser);
-      setUserId(sessionUser?.id ?? null);
-      if (sessionUser) {
-        try {
-          useProfileStore.getState().hydrate(sessionUser.id);
-          useCommitmentStore.getState().hydrate(sessionUser.id);
-          void useProfileStore.getState().loadProfile(sessionUser.id, { force: true });
-          void useCommitmentStore.getState().load(sessionUser.id);
-        } catch (err) {
-          console.error('hydrate stores on boot', err);
-          useCommitmentStore.getState().clear();
-        }
-      }
+    const bootTimeout = setTimeout(() => {
       setLoading(false);
-    });
+    }, 4000);
+
+    supabase.auth
+      .getSession()
+      .then(({ data }) => {
+        clearTimeout(bootTimeout);
+        setSession(data.session);
+        const sessionUser = data.session?.user ?? null;
+        setUser(sessionUser);
+        setUserId(sessionUser?.id ?? null);
+        if (sessionUser) {
+          try {
+            useProfileStore.getState().hydrate(sessionUser.id);
+            useCommitmentStore.getState().hydrate(sessionUser.id);
+            void useProfileStore.getState().loadProfile(sessionUser.id, { force: true });
+            void useCommitmentStore.getState().load(sessionUser.id);
+          } catch (err) {
+            console.error('hydrate stores on boot', err);
+            useCommitmentStore.getState().clear();
+          }
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('getSession boot error', err);
+        clearTimeout(bootTimeout);
+        setLoading(false);
+      });
 
     const {
       data: { subscription },
