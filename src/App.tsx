@@ -205,6 +205,9 @@ export default function App() {
           </ScreenTransition>
         </AppMain>
       </AppShell>
+    );
+  }
+
   if (isAuthCallbackRoute()) {
     return (
       <AppShell>

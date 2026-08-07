@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { readJson, writeJson, remove } from '@/lib/storage/localStore';
 import { STORAGE_KEYS } from '@/lib/storage/keys';
-import { fetchProfile, persistOnboarding } from '@/services/profileService';
+import { fetchProfile, ensureProfile, persistOnboarding } from '@/services/profileService';
 import { scheduleUrgeWarning } from '@/services/notificationService';
 import { fetchResilienceEvents } from '@/services/resilienceEventsService';
 import {
