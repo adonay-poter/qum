@@ -3,6 +3,7 @@ import { Page } from '@/components/layout/Page';
 import { BilingualLockup } from '@/design-system/identity';
 import { supabase } from '@/lib/supabase';
 import { clearAuthCallbackFromUrl } from '@/lib/auth/redirectUrl';
+import { ensureProfile } from '@/services/profileService';
 import {
   clearPendingVerificationStorage,
   writeVerifiedEmailForSignIn,
@@ -12,11 +13,16 @@ type CallbackStatus = 'working' | 'confirmed' | 'error';
 
 /**
  * Shown when the user opens the email confirmation link (lands on /auth/callback).
- * Supabase exchanges the token; we sign out and send them to sign in with email prefilled.
+ * Supabase exchanges the token; we verify email confirmation and allow them to proceed smoothly.
  */
 export function AuthCallbackScreen() {
   const [status, setStatus] = useState<CallbackStatus>('working');
   const [message, setMessage] = useState<string | null>(null);
+
+  const handleProceed = () => {
+    clearAuthCallbackFromUrl();
+    window.location.href = window.location.origin;
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -29,32 +35,41 @@ export function AuthCallbackScreen() {
       if (error) {
         setStatus('error');
         setMessage(error.message);
-        clearAuthCallbackFromUrl();
         return;
       }
 
       const sessionUser = data.session?.user;
       if (sessionUser?.email_confirmed_at) {
         const email = sessionUser.email ?? '';
-        await supabase.auth.signOut();
+        void ensureProfile(sessionUser.id);
         clearPendingVerificationStorage();
         if (email) writeVerifiedEmailForSignIn(email);
-        clearAuthCallbackFromUrl();
         setStatus('confirmed');
         window.dispatchEvent(new Event('qum:auth-verified'));
         return;
       }
 
+      if (sessionUser) {
+        const { data: refreshed } = await supabase.auth.refreshSession();
+        if (refreshed.user?.email_confirmed_at) {
+          void ensureProfile(refreshed.user.id);
+          clearPendingVerificationStorage();
+          if (refreshed.user.email) writeVerifiedEmailForSignIn(refreshed.user.email);
+          setStatus('confirmed');
+          window.dispatchEvent(new Event('qum:auth-verified'));
+          return;
+        }
+      }
+
       setStatus('error');
-      setMessage('We could not confirm your email. Try the link again or request a new one.');
-      clearAuthCallbackFromUrl();
+      setMessage('We could not confirm your email. Try opening the link again.');
     };
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (cancelled) return;
-      if (event === 'SIGNED_IN' && session?.user?.email_confirmed_at) {
+      if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') && session?.user?.email_confirmed_at) {
         void finish();
       }
     });
@@ -83,14 +98,14 @@ export function AuthCallbackScreen() {
             <p className="text-label uppercase text-tertiary">Email confirmed</p>
             <h1 className="mt-qum-sm text-h1 text-primary">You&apos;re verified</h1>
             <p className="mt-qum-md text-body text-secondary">
-              Sign in with your password to open QUM.
+              Your email is confirmed. Tap below to start using QUM.
             </p>
-            <a
-              href="./"
+            <button
+              onClick={handleProceed}
               className="mt-qum-lg inline-block w-full bg-tertiary px-5 py-3 text-center text-body font-semibold text-on-primary"
             >
-              Continue to sign in
-            </a>
+              Open QUM
+            </button>
           </>
         )}
         {status === 'error' && (
@@ -98,12 +113,12 @@ export function AuthCallbackScreen() {
             <p className="text-label uppercase text-tertiary">Something went wrong</p>
             <h1 className="mt-qum-sm text-h1 text-primary">Could not verify</h1>
             {message && <p className="mt-qum-md text-body text-tertiary">{message}</p>}
-            <a
-              href="./"
+            <button
+              onClick={handleProceed}
               className="mt-qum-lg inline-block text-body text-secondary underline-offset-2 hover:underline"
             >
               Back to sign in
-            </a>
+            </button>
           </>
         )}
       </div>

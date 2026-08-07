@@ -197,6 +197,15 @@ export default function App() {
           </ScreenTransition>
         </AppMain>
       </AppShell>
+  if (isAuthCallbackRoute()) {
+    return (
+      <AppShell>
+        <AppMain>
+          <ScreenTransition variants={fadeUp}>
+            <AuthCallbackScreen />
+          </ScreenTransition>
+        </AppMain>
+      </AppShell>
     );
   }
 
@@ -206,9 +215,7 @@ export default function App() {
 
   if (!user) {
     const authView =
-      isAuthCallbackRoute() ? (
-        <AuthCallbackScreen />
-      ) : authGate === 'check_email' ? (
+      authGate === 'check_email' ? (
         <CheckEmailScreen />
       ) : authGate === 'sign_up' ? (
         <SignUpScreen />
