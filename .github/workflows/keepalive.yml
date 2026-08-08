@@ -1,0 +1,14 @@
+name: Keepalive Ping
+
+on:
+  schedule:
+    # Run every 15 minutes to prevent EthioDeploy from sleeping
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping EthioDeploy
+        run: curl -s https://qum.ethiodeploy.com/ > /dev/null
