@@ -36,10 +36,17 @@ export function isAuthCallbackRoute(): boolean {
   return params.has('code');
 }
 
-/** Strip tokens from the URL after Supabase has consumed them (web only). */
 export function clearAuthCallbackFromUrl(): void {
   if (typeof window === 'undefined') return;
 
   const cleanPath = window.location.pathname.replace(/\/auth\/callback\/?$/, '') || '/';
-  window.history.replaceState({}, document.title, cleanPath);
+  try {
+    const url = new URL(window.location.href);
+    url.pathname = cleanPath;
+    url.search = '';
+    url.hash = '';
+    window.history.replaceState({}, document.title, url.toString());
+  } catch {
+    window.history.replaceState({}, document.title, cleanPath);
+  }
 }
