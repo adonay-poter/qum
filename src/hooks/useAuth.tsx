@@ -112,6 +112,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(sessionUser);
         setUserId(sessionUser?.id ?? null);
         if (sessionUser) {
+          clearPendingVerificationStorage();
+          setPendingVerification(null);
+          setAuthGate('sign_in');
           try {
             useProfileStore.getState().hydrate(sessionUser.id);
             useCommitmentStore.getState().hydrate(sessionUser.id);
@@ -189,13 +192,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
     if (error) return { error, needsVerification: false };
 
-    if (data.user && !data.session) {
-      beginCheckEmail(email, password);
-      return { error: null, needsVerification: true };
+    if (data.session && data.user) {
+      clearPendingVerificationStorage();
+      setPendingVerification(null);
+      return { error: null, needsVerification: false };
     }
 
-    if (data.user && !data.user.email_confirmed_at && data.session) {
-      await supabase.auth.signOut();
+    if (data.user && !data.session) {
       beginCheckEmail(email, password);
       return { error: null, needsVerification: true };
     }
