@@ -27,15 +27,15 @@ export function AuthCallbackScreen() {
   useEffect(() => {
     let cancelled = false;
 
-    const finish = async () => {
+    const checkVerification = async () => {
       const { data, error } = await supabase.auth.getSession();
 
-      if (cancelled) return;
+      if (cancelled) return false;
 
       if (error) {
         setStatus('error');
         setMessage(error.message);
-        return;
+        return true;
       }
 
       const sessionUser = data.session?.user;
@@ -46,7 +46,7 @@ export function AuthCallbackScreen() {
         if (email) writeVerifiedEmailForSignIn(email);
         setStatus('confirmed');
         window.dispatchEvent(new Event('qum:auth-verified'));
-        return;
+        return true;
       }
 
       if (sessionUser) {
@@ -57,27 +57,45 @@ export function AuthCallbackScreen() {
           if (refreshed.user.email) writeVerifiedEmailForSignIn(refreshed.user.email);
           setStatus('confirmed');
           window.dispatchEvent(new Event('qum:auth-verified'));
-          return;
+          return true;
         }
       }
 
-      setStatus('error');
-      setMessage('We could not confirm your email. Try opening the link again.');
+      return false;
     };
+
+    const timeout = setTimeout(async () => {
+      if (cancelled) return;
+      const verified = await checkVerification();
+      if (!verified && !cancelled) {
+        setStatus('error');
+        setMessage('We could not confirm your email. Try opening the link again.');
+      }
+    }, 3500);
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (cancelled) return;
-      if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') && session?.user?.email_confirmed_at) {
-        void finish();
+      if (
+        (event === 'SIGNED_IN' ||
+          event === 'TOKEN_REFRESHED' ||
+          event === 'USER_UPDATED' ||
+          event === 'INITIAL_SESSION') &&
+        session?.user?.email_confirmed_at
+      ) {
+        clearTimeout(timeout);
+        void checkVerification();
       }
     });
 
-    void finish();
+    void checkVerification().then((ok) => {
+      if (ok) clearTimeout(timeout);
+    });
 
     return () => {
       cancelled = true;
+      clearTimeout(timeout);
       subscription.unsubscribe();
     };
   }, []);

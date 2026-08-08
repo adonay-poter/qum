@@ -191,6 +191,18 @@ export default function App() {
     setView('home');
   };
 
+  if (isAuthCallbackRoute()) {
+    return (
+      <AppShell>
+        <AppMain>
+          <ScreenTransition variants={fadeUp}>
+            <AuthCallbackScreen />
+          </ScreenTransition>
+        </AppMain>
+      </AppShell>
+    );
+  }
+
   const bootLoading = loading || checking || (!!user && !profileReady);
 
   if (bootLoading) {
@@ -202,18 +214,6 @@ export default function App() {
               <HaltBarLoader height={32} />
               <p className="text-label uppercase text-secondary">Loading…</p>
             </div>
-          </ScreenTransition>
-        </AppMain>
-      </AppShell>
-    );
-  }
-
-  if (isAuthCallbackRoute()) {
-    return (
-      <AppShell>
-        <AppMain>
-          <ScreenTransition variants={fadeUp}>
-            <AuthCallbackScreen />
           </ScreenTransition>
         </AppMain>
       </AppShell>
