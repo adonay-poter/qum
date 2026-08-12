@@ -21,7 +21,7 @@ import {
 } from '@/lib/auth/pendingVerificationStorage';
 import { refreshTaskCache } from '@/repositories/taskRepository';
 import { ensureProfile } from '@/services/profileService';
-import { secureSignOut } from '@/services/authService';
+import { secureSignOut, signInWithTelegramPayload, type TelegramUserPayload } from '@/services/authService';
 import { useWaveStore } from '@/stores/waveStore';
 import { useProfileStore } from '@/stores/profileStore';
 import { useCommitmentStore } from '@/stores/commitmentStore';
@@ -51,6 +51,7 @@ interface AuthContextValue {
   verifiedEmailForSignIn: string | null;
   signIn: (email: string, password: string) => Promise<{ error: AuthError | null; needsVerification: boolean }>;
   signUp: (email: string, password: string) => Promise<{ error: AuthError | null; needsVerification: boolean }>;
+  signInWithTelegram: (payload: TelegramUserPayload) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   resendVerificationEmail: () => Promise<{ error: AuthError | null }>;
   checkEmailConfirmed: (password: string) => Promise<{ error: AuthError | null; verified: boolean }>;
@@ -273,6 +274,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAuthGate('sign_in');
   };
 
+  const signInWithTelegram = async (payload: TelegramUserPayload) => {
+    const { session: nextSession, error } = await signInWithTelegramPayload(payload);
+    if (error) return { error };
+    if (nextSession) {
+      clearVerifiedEmailForSignIn();
+      setVerifiedEmailForSignIn(null);
+    }
+    return { error: null };
+  };
+
   const dismissVerifiedBanner = () => {
     clearVerifiedEmailForSignIn();
     setVerifiedEmailForSignIn(null);
@@ -287,6 +298,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     verifiedEmailForSignIn,
     signIn,
     signUp,
+    signInWithTelegram,
     signOut: secureSignOut,
     resendVerificationEmail,
     checkEmailConfirmed,

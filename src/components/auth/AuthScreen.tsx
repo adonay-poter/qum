@@ -2,10 +2,13 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Page } from '@/components/layout/Page';
 import { BilingualLockup } from '@/design-system/identity';
 import { useAuth } from '@/hooks/useAuth';
+import { TelegramLoginButton } from '@/components/auth/TelegramLoginButton';
+import type { TelegramUserPayload } from '@/services/authService';
 
 export function AuthScreen() {
   const {
     signIn,
+    signInWithTelegram,
     openSignUp,
     verifiedEmailForSignIn,
     dismissVerifiedBanner,
@@ -35,6 +38,19 @@ export function AuthScreen() {
 
     if (result.error) setError(result.error.message);
     else dismissVerifiedBanner();
+    setBusy(false);
+  };
+
+  const handleTelegramAuth = async (telegramUser: TelegramUserPayload) => {
+    setBusy(true);
+    setError(null);
+
+    const result = await signInWithTelegram(telegramUser);
+    if (result.error) {
+      setError(result.error.message);
+    } else {
+      dismissVerifiedBanner();
+    }
     setBusy(false);
   };
 
@@ -88,6 +104,16 @@ export function AuthScreen() {
             {busy ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
+
+        <div className="mt-qum-lg flex items-center gap-qum-sm">
+          <div className="h-px flex-1 bg-secondary/30" />
+          <span className="text-xs uppercase text-secondary/70 tracking-wider">or continue with</span>
+          <div className="h-px flex-1 bg-secondary/30" />
+        </div>
+
+        <div className="mt-qum-md">
+          <TelegramLoginButton onAuth={handleTelegramAuth} />
+        </div>
 
         <button
           type="button"
