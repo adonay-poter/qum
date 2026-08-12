@@ -96,7 +96,7 @@ Deno.serve(async (req: Request) => {
         );
         if (existing) {
           userId = existing.id;
-          // Update password and metadata
+          // Update password & metadata
           await fetch(`${supabaseUrl}/auth/v1/admin/users/${userId}`, {
             method: "PUT",
             headers: {
@@ -106,6 +106,7 @@ Deno.serve(async (req: Request) => {
             },
             body: JSON.stringify({
               password: securePassword,
+              email_confirm: true,
               user_metadata: { ...existing.user_metadata, ...metadata },
             }),
           });
@@ -133,34 +134,88 @@ Deno.serve(async (req: Request) => {
         if (!createRes.ok || !newUserData?.id) {
           console.error("User creation failed:", newUserData);
           if (botToken) {
-            await sendTelegramMessage(botToken, chatId, "❌ Could not create account. Please try again.");
+            const errDetail = newUserData?.msg || newUserData?.message || newUserData?.error_description || "Unknown";
+            await sendTelegramMessage(botToken, chatId, `❌ User creation failed: ${errDetail}`);
           }
           return new Response("Create user failed", { status: 200, headers: corsHeaders });
         }
         userId = newUserData.id;
       }
 
-      // 3. Obtain Access & Refresh tokens via OAuth Password Grant
-      const tokenRes = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
+      // 3. Obtain Access & Refresh tokens via generate_link + verify OTP OR Password Grant
+      let accessToken: string | null = null;
+      let refreshToken: string | null = null;
+      let errDetail = "";
+
+      // Strategy A: Admin generate_link
+      const linkRes = await fetch(`${supabaseUrl}/auth/v1/admin/generate_link`, {
         method: "POST",
         headers: {
           apikey: serviceRoleKey,
+          Authorization: `Bearer ${serviceRoleKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          type: "magiclink",
           email: virtualEmail,
-          password: securePassword,
         }),
       });
 
-      const tokenData = await tokenRes.json();
-      const accessToken = tokenData?.access_token;
-      const refreshToken = tokenData?.refresh_token;
+      const linkData = await linkRes.json();
+      const tokenHash = linkData?.properties?.hashed_token;
 
-      if (!tokenRes.ok || !accessToken || !refreshToken) {
-        console.error("Token generation failed:", tokenData);
+      if (linkRes.ok && tokenHash) {
+        const otpRes = await fetch(`${supabaseUrl}/auth/v1/verify`, {
+          method: "POST",
+          headers: {
+            apikey: serviceRoleKey,
+            Authorization: `Bearer ${serviceRoleKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            type: "magiclink",
+            token_hash: tokenHash,
+          }),
+        });
+        const otpData = await otpRes.json();
+        if (otpRes.ok && otpData?.access_token) {
+          accessToken = otpData.access_token;
+          refreshToken = otpData.refresh_token;
+        } else {
+          errDetail = otpData?.msg || otpData?.error_description || JSON.stringify(otpData);
+        }
+      } else {
+        errDetail = linkData?.msg || linkData?.message || linkData?.error_description || JSON.stringify(linkData);
+      }
+
+      // Strategy B: Password grant fallback
+      if (!accessToken || !refreshToken) {
+        const tokenRes = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
+          method: "POST",
+          headers: {
+            apikey: serviceRoleKey,
+            Authorization: `Bearer ${serviceRoleKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: virtualEmail,
+            password: securePassword,
+          }),
+        });
+
+        const tokenData = await tokenRes.json();
+        if (tokenRes.ok && tokenData?.access_token) {
+          accessToken = tokenData.access_token;
+          refreshToken = tokenData.refresh_token;
+        } else {
+          errDetail = tokenData?.error_description || tokenData?.msg || tokenData?.message || errDetail;
+        }
+      }
+
+      if (!accessToken || !refreshToken) {
+        console.error("Token generation failed:", errDetail);
         if (botToken) {
-          await sendTelegramMessage(botToken, chatId, "❌ Session token generation failed.");
+          await sendTelegramMessage(botToken, chatId, `❌ Session token failed: ${errDetail}`);
         }
         return new Response("Token gen failed", { status: 200, headers: corsHeaders });
       }
@@ -199,8 +254,11 @@ Deno.serve(async (req: Request) => {
           ]
         );
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error("Error in telegram-bot-webhook:", e);
+      if (botToken) {
+        await sendTelegramMessage(botToken, chatId, `❌ Internal error: ${e?.message ?? String(e)}`);
+      }
     }
   } else if (text.startsWith("/start")) {
     if (botToken) {
