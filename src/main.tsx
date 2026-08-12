@@ -5,6 +5,7 @@ import App from './App';
 import { AuthProvider } from '@/hooks/useAuth';
 import { useAuthDeepLink } from '@/hooks/useAuthDeepLink';
 import { SplashScreen } from '@/components/brand/SplashScreen';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import './index.css';
 import { initAppStorage } from '@/lib/storage/appStorage';
 import { initHapticsFromStorage } from '@/lib/haptics';
@@ -74,6 +75,8 @@ function Root() {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Root />
+    <ErrorBoundary>
+      <Root />
+    </ErrorBoundary>
   </StrictMode>,
 );

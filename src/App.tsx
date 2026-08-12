@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { isNativeApp } from '@/lib/platform/native';
@@ -8,19 +8,10 @@ import { usePredictiveUrgeWarnings } from '@/hooks/usePredictiveUrgeWarnings';
 import { useAuth } from '@/hooks/useAuth';
 import { useSessionLockGuard } from '@/hooks/useSessionLockGuard';
 import { useOfflineSync } from '@/hooks/useOfflineSync';
+import { useAppInitializer } from '@/hooks/useAppInitializer';
 import { useWaveStore } from '@/stores/waveStore';
 import { useProfileStore } from '@/stores/profileStore';
-import { useCommitmentStore } from '@/stores/commitmentStore';
-import { useLetterStore } from '@/stores/letterStore';
-import { AuthScreen } from '@/components/auth/AuthScreen';
-import { SignUpScreen } from '@/components/auth/SignUpScreen';
-import { CheckEmailScreen } from '@/components/auth/CheckEmailScreen';
-import { AuthCallbackScreen } from '@/components/auth/AuthCallbackScreen';
 import { isAuthCallbackRoute } from '@/lib/auth/redirectUrl';
-import { HomeScreen } from '@/components/home/HomeScreen';
-import { WaveSession } from '@/components/wave/WaveSession';
-import { DashboardScreen } from '@/components/dashboard/DashboardScreen';
-import { OnboardingFlow } from '@/components/onboarding/OnboardingFlow';
 import { SessionTimer } from '@/components/ui/SessionTimer';
 import { BottomNavBar } from '@/components/ui/BottomNavBar';
 import { RageQuitOverlay } from '@/components/wave/RageQuitOverlay';
@@ -28,12 +19,22 @@ import { WaveEndToast } from '@/components/ui/WaveEndToast';
 import { AppMain, AppShell } from '@/components/layout/AppShell';
 import { ScreenTransition } from '@/components/layout/ScreenTransition';
 import { HaltBarLoader } from '@/design-system/identity';
+import { ViewSkeleton } from '@/components/ui/Skeleton';
 import { fadeIn, fadeUp, slideX, waveScreen } from '@/lib/motion';
 import { REFLECTION_NOTIFICATION_ID } from '@/services/reflectionScheduler';
 import type { ReflectionOpenContext } from '@/types/reflection';
-
 import { useDesktopGuard } from '@/hooks/useDesktopGuard';
-import { DesktopGuardScreen } from '@/components/desktop/DesktopGuardScreen';
+
+// Lazy loaded views for route-level code splitting
+const AuthScreen = lazy(() => import('@/components/auth/AuthScreen').then((m) => ({ default: m.AuthScreen })));
+const SignUpScreen = lazy(() => import('@/components/auth/SignUpScreen').then((m) => ({ default: m.SignUpScreen })));
+const CheckEmailScreen = lazy(() => import('@/components/auth/CheckEmailScreen').then((m) => ({ default: m.CheckEmailScreen })));
+const AuthCallbackScreen = lazy(() => import('@/components/auth/AuthCallbackScreen').then((m) => ({ default: m.AuthCallbackScreen })));
+const HomeScreen = lazy(() => import('@/components/home/HomeScreen').then((m) => ({ default: m.HomeScreen })));
+const WaveSession = lazy(() => import('@/components/wave/WaveSession').then((m) => ({ default: m.WaveSession })));
+const DashboardScreen = lazy(() => import('@/components/dashboard/DashboardScreen').then((m) => ({ default: m.DashboardScreen })));
+const OnboardingFlow = lazy(() => import('@/components/onboarding/OnboardingFlow').then((m) => ({ default: m.OnboardingFlow })));
+const DesktopGuardScreen = lazy(() => import('@/components/desktop/DesktopGuardScreen').then((m) => ({ default: m.DesktopGuardScreen })));
 
 type AppView = 'home' | 'dashboard';
 
@@ -44,10 +45,8 @@ export default function App() {
   const isLocked = useWaveStore((s) => s.isLocked);
   const profile = useProfileStore((s) => s.profile);
   const [view, setView] = useState<AppView>('home');
-  const [profileReady, setProfileReady] = useState(false);
   const [calmHourOpenRequest, setCalmHourOpenRequest] = useState(0);
-  const [reflectionOpenRequest, setReflectionOpenRequest] =
-    useState<ReflectionOpenContext | null>(null);
+  const [reflectionOpenRequest, setReflectionOpenRequest] = useState<ReflectionOpenContext | null>(null);
   const navDirection = useRef<1 | -1>(1);
 
   const onboardingDone = Boolean(profile?.has_completed_onboarding);
@@ -61,46 +60,7 @@ export default function App() {
   const clearWaveEndToast = useWaveStore((s) => s.clearWaveEndToast);
   useOfflineSync(user?.id ?? null);
 
-  useEffect(() => {
-    if (!user) {
-      setProfileReady(false);
-      useLetterStore.getState().clear();
-      return;
-    }
-
-    let cancelled = false;
-    setProfileReady(false);
-
-    // Fallback: Ensure PWA never hangs on loading screen if network profile load stalls
-    const timeout = setTimeout(() => {
-      if (!cancelled) setProfileReady(true);
-    }, 3500);
-
-    try {
-      useWaveStore.getState().hydrate();
-      useCommitmentStore.getState().hydrate(user.id);
-      void useCommitmentStore.getState().load(user.id);
-      useLetterStore.getState().hydrate(user.id);
-    } catch (err) {
-      console.error('commitment hydrate', err);
-      useCommitmentStore.getState().clear();
-      useLetterStore.getState().clear();
-    }
-
-    void useProfileStore
-      .getState()
-      .loadProfile(user.id, { force: true })
-      .catch((err) => console.error('loadProfile', err))
-      .finally(() => {
-        clearTimeout(timeout);
-        if (!cancelled) setProfileReady(true);
-      });
-
-    return () => {
-      cancelled = true;
-      clearTimeout(timeout);
-    };
-  }, [user?.id]);
+  const { profileReady } = useAppInitializer(user?.id);
 
   useEffect(() => {
     if (isLocked) setView('home');
@@ -195,9 +155,11 @@ export default function App() {
     return (
       <AppShell>
         <AppMain>
-          <ScreenTransition variants={fadeUp}>
-            <AuthCallbackScreen />
-          </ScreenTransition>
+          <Suspense fallback={<ViewSkeleton />}>
+            <ScreenTransition variants={fadeUp}>
+              <AuthCallbackScreen />
+            </ScreenTransition>
+          </Suspense>
         </AppMain>
       </AppShell>
     );
@@ -221,7 +183,11 @@ export default function App() {
   }
 
   if (isDesktop) {
-    return <DesktopGuardScreen />;
+    return (
+      <Suspense fallback={<ViewSkeleton />}>
+        <DesktopGuardScreen />
+      </Suspense>
+    );
   }
 
   if (!user) {
@@ -237,7 +203,9 @@ export default function App() {
     return (
       <AppShell>
         <AppMain>
-          <ScreenTransition variants={fadeUp}>{authView}</ScreenTransition>
+          <Suspense fallback={<ViewSkeleton />}>
+            <ScreenTransition variants={fadeUp}>{authView}</ScreenTransition>
+          </Suspense>
         </AppMain>
       </AppShell>
     );
@@ -250,9 +218,11 @@ export default function App() {
     return (
       <AppShell>
         <AppMain>
-          <ScreenTransition key="onboarding" variants={fadeUp}>
-            <OnboardingFlow />
-          </ScreenTransition>
+          <Suspense fallback={<ViewSkeleton />}>
+            <ScreenTransition key="onboarding" variants={fadeUp}>
+              <OnboardingFlow />
+            </ScreenTransition>
+          </Suspense>
         </AppMain>
       </AppShell>
     );
@@ -268,30 +238,32 @@ export default function App() {
       <WaveEndToast message={waveEndToast} onDismiss={clearWaveEndToast} />
       <SessionTimer />
       <AppMain>
-        <AnimatePresence mode="wait" initial={false}>
-          {inSession ? (
-            <ScreenTransition key="wave" variants={waveScreen}>
-              <WaveSession />
-            </ScreenTransition>
-          ) : view === 'dashboard' ? (
-            <ScreenTransition key="dashboard" variants={slideX(navDirection.current)}>
-              <DashboardScreen
-                userId={user.id}
-                onStartCalmHour={startCalmHour}
-              />
-            </ScreenTransition>
-          ) : (
-            <ScreenTransition key="home" variants={slideX(navDirection.current)}>
-              <HomeScreen
-                userId={user.id}
-                email={user.email}
-                openCalmHourRequest={calmHourOpenRequest}
-                openReflectionRequest={reflectionOpenRequest}
-                onReflectionClosed={() => setReflectionOpenRequest(null)}
-              />
-            </ScreenTransition>
-          )}
-        </AnimatePresence>
+        <Suspense fallback={<ViewSkeleton />}>
+          <AnimatePresence mode="wait" initial={false}>
+            {inSession ? (
+              <ScreenTransition key="wave" variants={waveScreen}>
+                <WaveSession />
+              </ScreenTransition>
+            ) : view === 'dashboard' ? (
+              <ScreenTransition key="dashboard" variants={slideX(navDirection.current)}>
+                <DashboardScreen
+                  userId={user.id}
+                  onStartCalmHour={startCalmHour}
+                />
+              </ScreenTransition>
+            ) : (
+              <ScreenTransition key="home" variants={slideX(navDirection.current)}>
+                <HomeScreen
+                  userId={user.id}
+                  email={user.email}
+                  openCalmHourRequest={calmHourOpenRequest}
+                  openReflectionRequest={reflectionOpenRequest}
+                  onReflectionClosed={() => setReflectionOpenRequest(null)}
+                />
+              </ScreenTransition>
+            )}
+          </AnimatePresence>
+        </Suspense>
       </AppMain>
       {!inSession && (
         <BottomNavBar

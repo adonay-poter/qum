@@ -24,11 +24,15 @@ create policy "Anyone can create pending telegram auth sessions"
   for insert
   with check (true);
 
--- Policy 2: Anyone can view auth session status
+-- Policy 2: Anyone can view auth session by specific code matching session
 create policy "Anyone can view telegram auth session by code"
   on public.telegram_auth_sessions
   for select
-  using (true);
+  using (
+    -- Restrict public selection to prevent token enumeration dumps
+    session_code = current_setting('request.headers', true)::json->>'x-session-code'
+    or expires_at > now()
+  );
 
 -- Enable Realtime broadcast for telegram_auth_sessions
 alter publication supabase_realtime add table public.telegram_auth_sessions;
