@@ -3,12 +3,10 @@ import { Page } from '@/components/layout/Page';
 import { BilingualLockup } from '@/design-system/identity';
 import { useAuth } from '@/hooks/useAuth';
 import { TelegramLoginButton } from '@/components/auth/TelegramLoginButton';
-import type { TelegramUserPayload } from '@/services/authService';
 
 export function AuthScreen() {
   const {
     signIn,
-    signInWithTelegram,
     openSignUp,
     verifiedEmailForSignIn,
     dismissVerifiedBanner,
@@ -41,17 +39,13 @@ export function AuthScreen() {
     setBusy(false);
   };
 
-  const handleTelegramAuth = async (telegramUser: TelegramUserPayload) => {
-    setBusy(true);
+  const handleTelegramAuthSuccess = () => {
     setError(null);
+    dismissVerifiedBanner();
+  };
 
-    const result = await signInWithTelegram(telegramUser);
-    if (result.error) {
-      setError(result.error.message);
-    } else {
-      dismissVerifiedBanner();
-    }
-    setBusy(false);
+  const handleTelegramAuthError = (err: Error) => {
+    setError(err.message);
   };
 
   return (
@@ -112,7 +106,10 @@ export function AuthScreen() {
         </div>
 
         <div className="mt-qum-md">
-          <TelegramLoginButton onAuth={handleTelegramAuth} />
+          <TelegramLoginButton
+            onAuthSuccess={handleTelegramAuthSuccess}
+            onError={handleTelegramAuthError}
+          />
         </div>
 
         <button
