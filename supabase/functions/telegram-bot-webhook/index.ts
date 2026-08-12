@@ -1,40 +1,16 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-interface TelegramUser {
-  id: number;
-  is_bot: boolean;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  language_code?: string;
-}
-
-interface TelegramMessage {
-  message_id: number;
-  from: TelegramUser;
-  chat: { id: number };
-  date: number;
-  text?: string;
-}
-
-interface TelegramUpdate {
-  update_id: number;
-  message?: TelegramMessage;
-}
-
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-Deno.serve(async (req) => {
+Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
   const botToken = Deno.env.get("TELEGRAM_BOT_TOKEN")?.trim();
-  const supabaseUrl = Deno.env.get("SUPABASE_URL");
-  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")?.trim();
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")?.trim();
 
   if (!supabaseUrl || !serviceRoleKey) {
     return new Response(JSON.stringify({ error: "Missing Supabase env vars" }), {
@@ -43,18 +19,14 @@ Deno.serve(async (req) => {
     });
   }
 
-  const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
-    auth: { persistSession: false },
-  });
-
-  let update: TelegramUpdate;
+  let update: any;
   try {
     update = await req.json();
   } catch {
     return new Response("Invalid JSON", { status: 400, headers: corsHeaders });
   }
 
-  const message = update.message;
+  const message = update?.message;
   if (!message || !message.text) {
     return new Response("OK", { status: 200, headers: corsHeaders });
   }
@@ -70,23 +42,33 @@ Deno.serve(async (req) => {
     const sessionCode = match[1];
 
     try {
-      // Find pending session
-      const { data: sessionRow, error: sessionErr } = await supabaseAdmin
-        .from("telegram_auth_sessions")
-        .select("*")
-        .eq("session_code", sessionCode)
-        .eq("status", "pending")
-        .gt("expires_at", new Date().toISOString())
-        .maybeSingle();
+      // 1. Find pending session from REST API
+      const nowIso = new Date().toISOString();
+      const sessionRes = await fetch(
+        `${supabaseUrl}/rest/v1/telegram_auth_sessions?session_code=eq.${sessionCode}&status=eq.pending&expires_at=gt.${nowIso}&select=*`,
+        {
+          headers: {
+            apikey: serviceRoleKey,
+            Authorization: `Bearer ${serviceRoleKey}`,
+          },
+        }
+      );
 
-      if (sessionErr || !sessionRow) {
+      const sessionRows = await sessionRes.json();
+      const sessionRow = sessionRows?.[0];
+
+      if (!sessionRow) {
         if (botToken) {
-          await sendTelegramMessage(botToken, chatId, "⚠️ *This login link has expired or is invalid.* Please return to Qum and try clicking 'Login with Telegram' again.");
+          await sendTelegramMessage(
+            botToken,
+            chatId,
+            "⚠️ *This login link has expired or is invalid.* Please return to Qum and click 'Login with Telegram' again."
+          );
         }
         return new Response("Session expired or invalid", { status: 200, headers: corsHeaders });
       }
 
-      // Create or locate user
+      // 2. Locate or create user via Auth Admin API
       const virtualEmail = `telegram_${telegramUser.id}@telegram.qum`;
       const metadata = {
         telegram_id: telegramUser.id,
@@ -97,76 +79,131 @@ Deno.serve(async (req) => {
       };
 
       let userId: string | null = null;
-      const { data: userList } = await supabaseAdmin.auth.admin.listUsers();
-      if (userList?.users) {
-        const existing = userList.users.find(
-          (u) => u.email === virtualEmail || u.user_metadata?.telegram_id === telegramUser.id
+
+      // Check if user exists by listing users
+      const listUsersRes = await fetch(`${supabaseUrl}/auth/v1/admin/users?page=1&per_page=1000`, {
+        headers: {
+          apikey: serviceRoleKey,
+          Authorization: `Bearer ${serviceRoleKey}`,
+        },
+      });
+
+      if (listUsersRes.ok) {
+        const listData = await listUsersRes.json();
+        const existing = listData?.users?.find(
+          (u: any) => u.email === virtualEmail || u.user_metadata?.telegram_id === telegramUser.id
         );
         if (existing) {
           userId = existing.id;
-          await supabaseAdmin.auth.admin.updateUserById(userId, {
-            user_metadata: { ...existing.user_metadata, ...metadata },
+          // Update metadata
+          await fetch(`${supabaseUrl}/auth/v1/admin/users/${userId}`, {
+            method: "PUT",
+            headers: {
+              apikey: serviceRoleKey,
+              Authorization: `Bearer ${serviceRoleKey}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user_metadata: { ...existing.user_metadata, ...metadata } }),
           });
         }
       }
 
       if (!userId) {
-        const { data: newUser, error: createErr } = await supabaseAdmin.auth.admin.createUser({
-          email: virtualEmail,
-          email_confirm: true,
-          user_metadata: metadata,
+        // Create user
+        const createRes = await fetch(`${supabaseUrl}/auth/v1/admin/users`, {
+          method: "POST",
+          headers: {
+            apikey: serviceRoleKey,
+            Authorization: `Bearer ${serviceRoleKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: virtualEmail,
+            email_confirm: true,
+            user_metadata: metadata,
+          }),
         });
 
-        if (createErr || !newUser.user) {
-          console.error("User creation error:", createErr);
+        const newUserData = await createRes.json();
+        if (!createRes.ok || !newUserData?.id) {
+          console.error("User creation failed:", newUserData);
           if (botToken) {
             await sendTelegramMessage(botToken, chatId, "❌ Could not create account. Please try again.");
           }
           return new Response("Create user failed", { status: 200, headers: corsHeaders });
         }
-        userId = newUser.user.id;
+        userId = newUserData.id;
       }
 
-      // Mint session tokens
-      const { data: linkData, error: linkErr } = await supabaseAdmin.auth.admin.generateLink({
-        type: "magiclink",
-        email: virtualEmail,
+      // 3. Generate Magic Link
+      const linkRes = await fetch(`${supabaseUrl}/auth/v1/admin/generate_link`, {
+        method: "POST",
+        headers: {
+          apikey: serviceRoleKey,
+          Authorization: `Bearer ${serviceRoleKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "magiclink",
+          email: virtualEmail,
+        }),
       });
 
-      if (linkErr || !linkData?.properties?.hashed_token) {
-        console.error("Link generation error:", linkErr);
+      const linkData = await linkRes.json();
+      const tokenHash = linkData?.properties?.hashed_token;
+
+      if (!linkRes.ok || !tokenHash) {
+        console.error("Link generation failed:", linkData);
         if (botToken) {
-          await sendTelegramMessage(botToken, chatId, "❌ Login generation failed.");
+          await sendTelegramMessage(botToken, chatId, "❌ Session generation failed.");
         }
         return new Response("Link gen failed", { status: 200, headers: corsHeaders });
       }
 
-      const { data: sessionData, error: sessionErr } = await supabaseAdmin.auth.verifyOtp({
-        token_hash: linkData.properties.hashed_token,
-        type: "magiclink",
+      // 4. Verify OTP to get access_token and refresh_token
+      const otpRes = await fetch(`${supabaseUrl}/auth/v1/verify`, {
+        method: "POST",
+        headers: {
+          apikey: serviceRoleKey,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "magiclink",
+          token_hash: tokenHash,
+        }),
       });
 
-      if (sessionErr || !sessionData?.session) {
-        console.error("Session verification error:", sessionErr);
+      const otpData = await otpRes.json();
+      const accessToken = otpData?.access_token;
+      const refreshToken = otpData?.refresh_token;
+
+      if (!otpRes.ok || !accessToken || !refreshToken) {
+        console.error("OTP verification failed:", otpData);
         if (botToken) {
-          await sendTelegramMessage(botToken, chatId, "❌ Session verification failed.");
+          await sendTelegramMessage(botToken, chatId, "❌ Session token verification failed.");
         }
         return new Response("Session verify failed", { status: 200, headers: corsHeaders });
       }
 
-      // Update telegram_auth_sessions to 'approved' with tokens
-      await supabaseAdmin
-        .from("telegram_auth_sessions")
-        .update({
+      // 5. Update telegram_auth_sessions to 'approved'
+      await fetch(`${supabaseUrl}/rest/v1/telegram_auth_sessions?id=eq.${sessionRow.id}`, {
+        method: "PATCH",
+        headers: {
+          apikey: serviceRoleKey,
+          Authorization: `Bearer ${serviceRoleKey}`,
+          "Content-Type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify({
           status: "approved",
           telegram_id: telegramUser.id,
           telegram_username: telegramUser.username ?? null,
-          access_token: sessionData.session.access_token,
-          refresh_token: sessionData.session.refresh_token,
-        })
-        .eq("id", sessionRow.id);
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        }),
+      });
 
-      // Reply back to Telegram user
+      // 6. Send success response back to Telegram user
       if (botToken) {
         await sendTelegramMessage(
           botToken,
@@ -183,7 +220,7 @@ Deno.serve(async (req) => {
         );
       }
     } catch (e) {
-      console.error("Error handling Telegram bot auth:", e);
+      console.error("Error in telegram-bot-webhook:", e);
     }
   } else if (text.startsWith("/start")) {
     if (botToken) {
