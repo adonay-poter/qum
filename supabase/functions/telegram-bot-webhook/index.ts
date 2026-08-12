@@ -68,8 +68,9 @@ Deno.serve(async (req: Request) => {
         return new Response("Session expired or invalid", { status: 200, headers: corsHeaders });
       }
 
-      // 2. Locate or create user via Auth Admin API
-      const virtualEmail = `telegram_${telegramUser.id}@telegram.qum`;
+      // 2. Derive valid email and secure deterministic password for Telegram user
+      const virtualEmail = `telegram_${telegramUser.id}@qum.app`;
+      const securePassword = `TgP@ss_${telegramUser.id}_${serviceRoleKey.slice(0, 16)}`;
       const metadata = {
         telegram_id: telegramUser.id,
         telegram_username: telegramUser.username ?? null,
@@ -95,7 +96,7 @@ Deno.serve(async (req: Request) => {
         );
         if (existing) {
           userId = existing.id;
-          // Update metadata
+          // Update password and metadata
           await fetch(`${supabaseUrl}/auth/v1/admin/users/${userId}`, {
             method: "PUT",
             headers: {
@@ -103,7 +104,10 @@ Deno.serve(async (req: Request) => {
               Authorization: `Bearer ${serviceRoleKey}`,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ user_metadata: { ...existing.user_metadata, ...metadata } }),
+            body: JSON.stringify({
+              password: securePassword,
+              user_metadata: { ...existing.user_metadata, ...metadata },
+            }),
           });
         }
       }
@@ -119,6 +123,7 @@ Deno.serve(async (req: Request) => {
           },
           body: JSON.stringify({
             email: virtualEmail,
+            password: securePassword,
             email_confirm: true,
             user_metadata: metadata,
           }),
@@ -135,57 +140,32 @@ Deno.serve(async (req: Request) => {
         userId = newUserData.id;
       }
 
-      // 3. Generate Magic Link
-      const linkRes = await fetch(`${supabaseUrl}/auth/v1/admin/generate_link`, {
+      // 3. Obtain Access & Refresh tokens via OAuth Password Grant
+      const tokenRes = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
         method: "POST",
         headers: {
           apikey: serviceRoleKey,
-          Authorization: `Bearer ${serviceRoleKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          type: "magiclink",
           email: virtualEmail,
+          password: securePassword,
         }),
       });
 
-      const linkData = await linkRes.json();
-      const tokenHash = linkData?.properties?.hashed_token;
+      const tokenData = await tokenRes.json();
+      const accessToken = tokenData?.access_token;
+      const refreshToken = tokenData?.refresh_token;
 
-      if (!linkRes.ok || !tokenHash) {
-        console.error("Link generation failed:", linkData);
+      if (!tokenRes.ok || !accessToken || !refreshToken) {
+        console.error("Token generation failed:", tokenData);
         if (botToken) {
-          await sendTelegramMessage(botToken, chatId, "❌ Session generation failed.");
+          await sendTelegramMessage(botToken, chatId, "❌ Session token generation failed.");
         }
-        return new Response("Link gen failed", { status: 200, headers: corsHeaders });
+        return new Response("Token gen failed", { status: 200, headers: corsHeaders });
       }
 
-      // 4. Verify OTP to get access_token and refresh_token
-      const otpRes = await fetch(`${supabaseUrl}/auth/v1/verify`, {
-        method: "POST",
-        headers: {
-          apikey: serviceRoleKey,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "magiclink",
-          token_hash: tokenHash,
-        }),
-      });
-
-      const otpData = await otpRes.json();
-      const accessToken = otpData?.access_token;
-      const refreshToken = otpData?.refresh_token;
-
-      if (!otpRes.ok || !accessToken || !refreshToken) {
-        console.error("OTP verification failed:", otpData);
-        if (botToken) {
-          await sendTelegramMessage(botToken, chatId, "❌ Session token verification failed.");
-        }
-        return new Response("Session verify failed", { status: 200, headers: corsHeaders });
-      }
-
-      // 5. Update telegram_auth_sessions to 'approved'
+      // 4. Update telegram_auth_sessions to 'approved'
       await fetch(`${supabaseUrl}/rest/v1/telegram_auth_sessions?id=eq.${sessionRow.id}`, {
         method: "PATCH",
         headers: {
@@ -203,7 +183,7 @@ Deno.serve(async (req: Request) => {
         }),
       });
 
-      // 6. Send success response back to Telegram user
+      // 5. Send success response back to Telegram user
       if (botToken) {
         await sendTelegramMessage(
           botToken,
