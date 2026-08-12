@@ -96,7 +96,7 @@ Deno.serve(async (req: Request) => {
         );
         if (existing) {
           userId = existing.id;
-          // Update password & metadata
+          // Update password & confirm email
           await fetch(`${supabaseUrl}/auth/v1/admin/users/${userId}`, {
             method: "PUT",
             headers: {
@@ -142,7 +142,7 @@ Deno.serve(async (req: Request) => {
         userId = newUserData.id;
       }
 
-      // 3. Obtain Access & Refresh tokens via generate_link + verify OTP OR Password Grant
+      // 3. Obtain Access & Refresh tokens
       let accessToken: string | null = null;
       let refreshToken: string | null = null;
       let errDetail = "";
@@ -162,7 +162,7 @@ Deno.serve(async (req: Request) => {
       });
 
       const linkData = await linkRes.json();
-      const tokenHash = linkData?.properties?.hashed_token;
+      const tokenHash = linkData?.hashed_token || linkData?.properties?.hashed_token;
 
       if (linkRes.ok && tokenHash) {
         const otpRes = await fetch(`${supabaseUrl}/auth/v1/verify`, {
